@@ -29,7 +29,6 @@ std = [
     'contracts-primitives/std',
     'contracts-rpc-runtime-api/std',
     'template/std',
-    'test-pallet/std',
 ]
 [dependencies.aura]
 default-features = false
@@ -173,12 +172,6 @@ default-features = false
 package = 'pallet-template'
 path = '../pallets/template'
 version = '2.0.0-rc4'
-
-[dependencies.test-pallet]
-default-features = false
-package = 'test-pallet'
-git = 'https://github.com/thanhdeptrai69/cere-test-pallet.git'
-branch = 'master'
 
 [dependencies.timestamp]
 default-features = false

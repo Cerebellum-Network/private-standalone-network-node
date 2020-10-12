@@ -2469,6 +2469,24 @@ dependencies = [
 ]
 
 [[package]]
+name = "lite-json"
+version = "0.1.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c73e713a23ac6e12074c9e96ef2dfb770921e0cb9244c093bd38424209e0e523"
+dependencies = [
+ "lite-parser",
+]
+
+[[package]]
+name = "lite-parser"
+version = "0.1.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0c50092e40e0ccd1bf2015a10333fde0502ff95b832b0895dc1ca0d7ac6c52f6"
+dependencies = [
+ "paste",
+]
+
+[[package]]
 name = "lock_api"
 version = "0.3.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2835,7 +2853,6 @@ dependencies = [
  "sp-transaction-pool",
  "sp-version",
  "substrate-wasm-builder-runner",
- "test-pallet 2.0.0-rc4 (git+https://github.com/thanhdeptrai69/cere-test-pallet.git)",
 ]
 
 [[package]]
@@ -3169,10 +3186,13 @@ version = "2.0.0-rc4"
 dependencies = [
  "frame-support",
  "frame-system",
+ "lite-json",
  "parity-scale-codec",
+ "serde",
  "sp-core",
  "sp-io",
  "sp-runtime",
+ "sp-std",
 ]
 
 [[package]]
@@ -6164,28 +6184,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "bb6bfa289a4d7c5766392812c0a1f4c1ba45afa1ad47803c11e1f407d846d75f"
 dependencies = [
  "winapi-util",
-]
-
-[[package]]
-name = "test-pallet"
-version = "2.0.0-rc4"
-source = "git+https://github.com/thanhdeptrai69/cere-test-pallet.git#ff3ae1ae959261251239fe1998c59c044c57aa75"
-dependencies = [
- "frame-support",
- "frame-system",
- "parity-scale-codec",
-]
-
-[[package]]
-name = "test-pallet"
-version = "2.0.0-rc4"
-dependencies = [
- "frame-support",
- "frame-system",
- "parity-scale-codec",
- "sp-core",
- "sp-io",
- "sp-runtime",
 ]
 
 [[package]]
