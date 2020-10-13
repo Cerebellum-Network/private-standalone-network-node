@@ -9,18 +9,18 @@
 /// For more guidance on Substrate FRAME, see the example pallet
 /// https://github.com/paritytech/substrate/blob/master/frame/example/src/lib.rs
 
-use frame_support::{decl_module, decl_storage, decl_event, decl_error, dispatch, debug, traits::Get,
+use frame_support::{decl_module, decl_storage, decl_event, decl_error, dispatch, debug,
 	dispatch::DispatchResult,
 };
 
 use frame_system::{self as system, ensure_signed,
 	ensure_none,
 	offchain::{
-		AppCrypto, CreateSignedTransaction, SendSignedTransaction, SendUnsignedTransaction,
-		SignedPayload, SigningTypes, Signer, SubmitTransaction,
+		AppCrypto, CreateSignedTransaction, SendSignedTransaction,
+		Signer,
 	},
 };
-use frame_support::sp_runtime::{print, offchain::http};
+use frame_support::sp_runtime::{offchain::http};
 use frame_support::traits::Vec;
 use core::{convert::TryInto};
 use sp_std::{
@@ -241,18 +241,19 @@ impl<T: Trait> Module<T> {
 		});
 	}
 
-	fn offchain_unsigned_tx(block_number: T::BlockNumber) -> Result<(), Error<T>> {
-		let number: u64 = block_number.try_into().unwrap_or(0) as u64;
-		let call = Call::submit_number_unsigned(number);
+	// Commented out unused function
+	// fn offchain_unsigned_tx(block_number: T::BlockNumber) -> Result<(), Error<T>> {
+	// 	let number: u64 = block_number.try_into().unwrap_or(0) as u64;
+	// 	let call = Call::submit_number_unsigned(number);
 
-		// `submit_unsigned_transaction` returns a type of `Result<(), ()>`
-		//   ref: https://substrate.dev/rustdocs/v2.0.0/frame_system/offchain/struct.SubmitTransaction.html#method.submit_unsigned_transaction
-		SubmitTransaction::<T, Call<T>>::submit_unsigned_transaction(call.into())
-			.map_err(|_| {
-				debug::error!("Failed in offchain_unsigned_tx");
-				<Error<T>>::OffchainUnsignedTxError
-			})
-	}
+	// 	// `submit_unsigned_transaction` returns a type of `Result<(), ()>`
+	// 	//   ref: https://substrate.dev/rustdocs/v2.0.0/frame_system/offchain/struct.SubmitTransaction.html#method.submit_unsigned_transaction
+	// 	SubmitTransaction::<T, Call<T>>::submit_unsigned_transaction(call.into())
+	// 		.map_err(|_| {
+	// 			debug::error!("Failed in offchain_unsigned_tx");
+	// 			<Error<T>>::OffchainUnsignedTxError
+	// 		})
+	// }
 
 	fn offchain_signed_tx(block_number: T::BlockNumber) -> Result<(), Error<T>> {
 		// We retrieve a signer and check if it is valid.
