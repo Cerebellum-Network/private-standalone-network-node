@@ -5,7 +5,7 @@ docker build . -t thanh/substrate20
 ```
 ### Run builded docker file
 ```bash
-docker run -d -P --name cerenode thanh/substrate
+docker run -d -P --name cerenode thanh/substrate20
 ```
 
 ### Run in Docker by docker compose
