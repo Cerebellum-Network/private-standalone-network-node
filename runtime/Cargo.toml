@@ -54,6 +54,11 @@ sp-std = { default-features = false, version = '2.0.0' }
 sp-transaction-pool = { default-features = false, version = '2.0.0' }
 sp-version = { default-features = false, version = '2.0.0' }
 
+# Support pallet contract
+pallet-contracts = { version = "2.0.0", default_features = false }
+pallet-contracts-primitives = { version = "2.0.0", default_features = false }
+pallet-contracts-rpc-runtime-api = { version = "0.8.0", default-features = false }
+
 [features]
 default = ['std']
 runtime-benchmarks = [
@@ -93,4 +98,8 @@ std = [
     'sp-std/std',
     'sp-transaction-pool/std',
     'sp-version/std',
+    # Support pallet contract
+    'pallet-contracts/std',
+    'pallet-contracts-primitives/std',
+    'pallet-contracts-rpc-runtime-api/std',
 ]
