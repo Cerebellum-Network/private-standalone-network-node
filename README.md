@@ -1,6 +1,14 @@
 # cere-substrate
-### Run in Docker
+### Build docker file
+```bash
+docker build . -t thanh/substrate20
+```
+### Run builded docker file
+```bash
+docker run -d -P --name cerenode thanh/substrate20
+```
 
+### Run in Docker by docker compose
 First, install [Docker](https://docs.docker.com/get-docker/) and
 [Docker Compose](https://docs.docker.com/compose/install/).
 

@@ -7,7 +7,6 @@ services:
     working_dir: /var/www/node-template
     ports:
       - "9944:9944"
-      - "9933:9933"
     environment:
       - CARGO_HOME=/var/www/node-template/.cargo
     volumes:
