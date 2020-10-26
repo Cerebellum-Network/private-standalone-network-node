@@ -13,3 +13,6 @@
 .local
 
 .vscode
+
+*.iml
+.idea
