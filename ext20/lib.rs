@@ -3,14 +3,15 @@
 use ink_lang as ink;
 
 #[ink::contract]
-mod erc20 {
+mod ext20 {
     #[cfg(not(feature = "ink-as-dependency"))]
     #[ink(storage)]
-    pub struct Erc20 {
+    pub struct Ext20 {
         /// The total supply.
         total_supply: Balance,
         /// The balance of each user.
         balances: ink_storage::collections::HashMap<AccountId, Balance>,
+        data_str: Hash,
     }
 
     #[ink(event)]
@@ -21,6 +22,7 @@ mod erc20 {
         to: Option<AccountId>,
         #[ink(topic)]
         value: Balance,
+        hash: Hash,
     }
 
     // ACTION: Add an `Approval` event
@@ -28,23 +30,27 @@ mod erc20 {
     //         * `owner` as an `AccountId`
     //         * `spender` as an `AccountId`
     //         * `value` as a `Balance`
+    //         * `hashstr` as a `Hash`
 
-    impl Erc20 {
+    impl Ext20 {
         #[ink(constructor)]
-        pub fn new(initial_supply: Balance) -> Self {
+        pub fn new(initial_supply: Balance, hash_str: Hash) -> Self {
             let caller = Self::env().caller();
             let mut balances = ink_storage::collections::HashMap::new();
+            let hash = hash_str;
             balances.insert(caller, initial_supply);
 
             Self::env().emit_event(Transfer {
                 from: None,
                 to: Some(caller),
                 value: initial_supply,
+                hash: hash,
             });
 
             Self {
                 total_supply: initial_supply,
-                balances
+                data_str: hash_str,
+                balances,
             }
         }
 
@@ -59,11 +65,11 @@ mod erc20 {
         }
 
         #[ink(message)]
-        pub fn transfer(&mut self, to: AccountId, value: Balance) -> bool {
-            self.transfer_from_to(self.env().caller(), to, value)
+        pub fn transfer(&mut self, to: AccountId, value: Balance, hashstr: Hash) -> bool {
+            self.transfer_from_to(self.env().caller(), to, value, hashstr)
         }
 
-        fn transfer_from_to(&mut self, from: AccountId, to: AccountId, value: Balance) -> bool {
+        fn transfer_from_to(&mut self, from: AccountId, to: AccountId, value: Balance, _hashstr: Hash) -> bool {
             let from_balance = self.balance_of_or_zero(&from);
             if from_balance < value {
                 return false
@@ -71,6 +77,7 @@ mod erc20 {
 
             // Update the sender's balance.
             self.balances.insert(from, from_balance - value);
+            self.data_str = _hashstr;
 
             // Update the receiver's balance.
             let to_balance = self.balance_of_or_zero(&to);
@@ -80,6 +87,7 @@ mod erc20 {
                 from: Some(from),
                 to: Some(to),
                 value,
+                hash: _hashstr,
             });
 
             true
@@ -99,13 +107,13 @@ mod erc20 {
 
         #[ink::test]
         fn new_works() {
-            let contract = Erc20::new(777);
+            let contract = Ext20::new(777, "Thanh send test".to_string());
             assert_eq!(contract.total_supply(), 777);
         }
 
         #[ink::test]
         fn balance_works() {
-            let contract = Erc20::new(100);
+            let contract = Ext20::new(100, "Thanh send test".to_string());
             assert_eq!(contract.total_supply(), 100);
             assert_eq!(contract.balance_of(AccountId::from([0x1; 32])), 100);
             assert_eq!(contract.balance_of(AccountId::from([0x0; 32])), 0);
@@ -113,11 +121,11 @@ mod erc20 {
 
         #[ink::test]
         fn transfer_works() {
-            let mut contract = Erc20::new(100);
+            let mut contract = Ext20::new(100, "Thanh send test".to_string());
             assert_eq!(contract.balance_of(AccountId::from([0x1; 32])), 100);
-            assert!(contract.transfer(AccountId::from([0x0; 32]), 10));
+            assert!(contract.transfer(AccountId::from([0x0; 32]), 10, "Thanh send test".to_string()));
             assert_eq!(contract.balance_of(AccountId::from([0x0; 32])), 10);
-            assert!(!contract.transfer(AccountId::from([0x0; 32]), 100));
+            assert!(!contract.transfer(AccountId::from([0x0; 32]), 100, "Thanh send test".to_string()));
         }
     }
 }
