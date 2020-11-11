@@ -297,8 +297,25 @@ impl pallet_sudo::Trait for Runtime {
 	type Call = Call;
 }
 
+parameter_types! {
+	// Choose a fee that incentivizes desireable behavior.
+	pub const NickReservationFee: u128 = 100;
+	pub const MinNickLength: usize = 1;
+	// Maximum bounds on storage are important to secure your chain.
+	pub const MaxNickLength: usize = usize::MAX;
+}
+
 /// Configure the template pallet in pallets/template.
 impl pallet_template::Trait for Runtime {
+	// The Balances pallet implements the ReservableCurrency trait.
+
+	// Use the MinNickLength from the parameter_types block.
+	type MinLength = MinNickLength;
+
+	// Use the MaxNickLength from the parameter_types block.
+	type MaxLength = MaxNickLength;
+
+	// The ubiquitous event type.
 	type Event = Event;
 }
 

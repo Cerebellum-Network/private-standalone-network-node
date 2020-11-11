@@ -1,11 +1,17 @@
 #![cfg_attr(not(feature = "std"), no_std)]
 
+use frame_support::{
+	decl_error, decl_event, decl_module, decl_storage,
+	// dispatch,
+	ensure,
+	traits::{ Get },
+};
+use frame_system::ensure_signed;
+
 /// Edit this file to define custom logic or remove it if it is not needed.
 /// Learn more about FRAME and the core library of Substrate FRAME pallets:
 /// https://substrate.dev/docs/en/knowledgebase/runtime/frame
-
-use frame_support::{decl_module, decl_storage, decl_event, decl_error, dispatch, traits::Get};
-use frame_system::ensure_signed;
+use sp_std::prelude::*;
 
 #[cfg(test)]
 mod mock;
@@ -17,6 +23,12 @@ mod tests;
 pub trait Trait: frame_system::Trait {
 	/// Because this pallet emits events, it depends on the runtime's definition of an event.
 	type Event: From<Event<Self>> + Into<<Self as frame_system::Trait>::Event>;
+
+	/// The minimum length a name may be.
+	type MinLength: Get<usize>;
+
+	/// The maximum length a name may be.
+	type MaxLength: Get<usize>;
 }
 
 // The pallet's runtime storage items.
@@ -26,29 +38,33 @@ decl_storage! {
 	// This name may be updated, but each pallet in the runtime must use a unique name.
 	// ---------------------------------vvvvvvvvvvvvvv
 	trait Store for Module<T: Trait> as TemplateModule {
-		// Learn more about declaring storage items:
-		// https://substrate.dev/docs/en/knowledgebase/runtime/storage#declaring-storage-items
-		Something get(fn something): Option<u32>;
+		/// The lookup table for string.
+		StringDataOf: map hasher(twox_64_concat) T::AccountId => Option<Vec<u8>>;
 	}
 }
 
 // Pallets use events to inform users when important changes are made.
 // https://substrate.dev/docs/en/knowledgebase/runtime/events
 decl_event!(
-	pub enum Event<T> where AccountId = <T as frame_system::Trait>::AccountId {
-		/// Event documentation should end with an array that provides descriptive names for event
-		/// parameters. [something, who]
-		SomethingStored(u32, AccountId),
+	pub enum Event<T>
+	where
+		AccountId = <T as frame_system::Trait>::AccountId,
+	{
+		/// A data string was set. \[who\]
+		DataStringSet(AccountId),
+	
+		/// A data string was changed. \[who\]
+		DataStringChanged(AccountId),
 	}
 );
 
 // Errors inform users that something went wrong.
 decl_error! {
 	pub enum Error for Module<T: Trait> {
-		/// Error names should be descriptive.
-		NoneValue,
-		/// Errors should have helpful documentation associated with them.
-		StorageOverflow,
+		/// A name is too short.
+		TooShort,
+		/// A name is too long.
+		TooLong,
 	}
 }
 
@@ -63,41 +79,26 @@ decl_module! {
 		// Events must be initialized if they are used by the pallet.
 		fn deposit_event() = default;
 
-		/// An example dispatchable that takes a singles value as a parameter, writes the value to
-		/// storage and emits an event. This function must be dispatched by a signed extrinsic.
-		#[weight = 10_000 + T::DbWeight::get().writes(1)]
-		pub fn do_something(origin, something: u32) -> dispatch::DispatchResult {
-			// Check that the extrinsic was signed and get the signer.
-			// This function will return an error if the extrinsic is not signed.
-			// https://substrate.dev/docs/en/knowledgebase/runtime/origin
-			let who = ensure_signed(origin)?;
+		/// The minimum length a name may be.
+		const MinLength: u32 = T::MinLength::get() as u32;
 
-			// Update storage.
-			Something::put(something);
+		/// The maximum length a name may be.
+		const MaxLength: u32 = T::MaxLength::get() as u32;
 
-			// Emit an event.
-			Self::deposit_event(RawEvent::SomethingStored(something, who));
-			// Return a successful DispatchResult
-			Ok(())
-		}
+		#[weight = 50_000_000]
+		fn send_data(origin, send_to: T::AccountId, data: Vec<u8>) {
+			let sender = ensure_signed(origin)?;
 
-		/// An example dispatchable that may throw a custom error.
-		#[weight = 10_000 + T::DbWeight::get().reads_writes(1,1)]
-		pub fn cause_error(origin) -> dispatch::DispatchResult {
-			let _who = ensure_signed(origin)?;
+			ensure!(data.len() >= T::MinLength::get(), Error::<T>::TooShort);
+			ensure!(data.len() <= T::MaxLength::get(), Error::<T>::TooLong);
 
-			// Read a value from storage.
-			match Something::get() {
-				// Return an error if the value has not been set.
-				None => Err(Error::<T>::NoneValue)?,
-				Some(old) => {
-					// Increment the value read from storage; will error in the event of overflow.
-					let new = old.checked_add(1).ok_or(Error::<T>::StorageOverflow)?;
-					// Update the value in storage with the incremented result.
-					Something::put(new);
-					Ok(())
-				},
-			}
+			if let Some(_) = <StringDataOf<T>>::get(&sender) {
+				Self::deposit_event(RawEvent::DataStringChanged(sender.clone()));
+			} else {
+				Self::deposit_event(RawEvent::DataStringSet(sender.clone()));
+			};
+
+			<StringDataOf<T>>::insert(send_to, data);
 		}
 	}
 }
