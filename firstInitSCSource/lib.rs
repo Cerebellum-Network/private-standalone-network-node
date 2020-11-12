@@ -3,69 +3,121 @@
 use ink_lang as ink;
 
 #[ink::contract]
-mod firstInitSCSource {
-
-    /// Defines the storage of your contract.
-    /// Add new fields to the below struct in order
-    /// to add new static storage fields to your contract.
+mod erc20 {
+    #[cfg(not(feature = "ink-as-dependency"))]
     #[ink(storage)]
-    pub struct FirstInitScSource {
-        /// Stores a single `bool` value on the storage.
-        value: bool,
+    pub struct Erc20 {
+        /// The total supply.
+        total_supply: Balance,
+        /// The balance of each user.
+        balances: ink_storage::collections::HashMap<AccountId, Balance>,
     }
 
-    impl FirstInitScSource {
-        /// Constructor that initializes the `bool` value to the given `init_value`.
-        #[ink(constructor)]
-        pub fn new(init_value: bool) -> Self {
-            Self { value: init_value }
-        }
-
-        /// Constructor that initializes the `bool` value to `false`.
-        ///
-        /// Constructors can delegate to other constructors.
-        #[ink(constructor)]
-        pub fn default() -> Self {
-            Self::new(Default::default())
-        }
-
-        /// A message that can be called on instantiated contracts.
-        /// This one flips the value of the stored `bool` from `true`
-        /// to `false` and vice versa.
-        #[ink(message)]
-        pub fn flip(&mut self) {
-            self.value = !self.value;
-        }
-
-        /// Simply returns the current value of our `bool`.
-        #[ink(message)]
-        pub fn get(&self) -> bool {
-            self.value
-        }
+    #[ink(event)]
+    pub struct Transfer {
+        #[ink(topic)]
+        from: Option<AccountId>,
+        #[ink(topic)]
+        to: Option<AccountId>,
+        #[ink(topic)]
+        value: Balance,
     }
 
-    /// Unit tests in Rust are normally defined within such a `#[cfg(test)]`
-    /// module and test functions are marked with a `#[test]` attribute.
-    /// The below code is technically just normal Rust code.
+    // ACTION: Add an `Approval` event
+    //         It should emit the following:
+    //         * `owner` as an `AccountId`
+    //         * `spender` as an `AccountId`
+    //         * `value` as a `Balance`
+
+    impl Erc20 {
+        #[ink(constructor)]
+        pub fn new(initial_supply: Balance) -> Self {
+            let caller = Self::env().caller();
+            let mut balances = ink_storage::collections::HashMap::new();
+            balances.insert(caller, initial_supply);
+
+            Self::env().emit_event(Transfer {
+                from: None,
+                to: Some(caller),
+                value: initial_supply,
+            });
+
+            Self {
+                total_supply: initial_supply,
+                balances
+            }
+        }
+
+        #[ink(message)]
+        pub fn total_supply(&self) -> Balance {
+            self.total_supply
+        }
+
+        #[ink(message)]
+        pub fn balance_of(&self, owner: AccountId) -> Balance {
+            self.balance_of_or_zero(&owner)
+        }
+
+        #[ink(message)]
+        pub fn transfer(&mut self, to: AccountId, value: Balance) -> bool {
+            self.transfer_from_to(self.env().caller(), to, value)
+        }
+
+        fn transfer_from_to(&mut self, from: AccountId, to: AccountId, value: Balance) -> bool {
+            let from_balance = self.balance_of_or_zero(&from);
+            if from_balance < value {
+                return false
+            }
+
+            // Update the sender's balance.
+            self.balances.insert(from, from_balance - value);
+
+            // Update the receiver's balance.
+            let to_balance = self.balance_of_or_zero(&to);
+            self.balances.insert(to, to_balance + value);
+
+            self.env().emit_event(Transfer {
+                from: Some(from),
+                to: Some(to),
+                value,
+            });
+
+            true
+        }
+
+        fn balance_of_or_zero(&self, owner: &AccountId) -> Balance {
+            *self.balances.get(owner).unwrap_or(&0)
+        }
+
+    }
+
     #[cfg(test)]
     mod tests {
-        /// Imports all the definitions from the outer scope so we can use them here.
         use super::*;
 
-        /// We test if the default constructor does its job.
-        #[test]
-        fn default_works() {
-            let firstInitSCSource = FirstInitScSource::default();
-            assert_eq!(firstInitSCSource.get(), false);
+        use ink_lang as ink;
+
+        #[ink::test]
+        fn new_works() {
+            let contract = Erc20::new(777);
+            assert_eq!(contract.total_supply(), 777);
         }
 
-        /// We test a simple use case of our contract.
-        #[test]
-        fn it_works() {
-            let mut firstInitSCSource = FirstInitScSource::new(false);
-            assert_eq!(firstInitSCSource.get(), false);
-            firstInitSCSource.flip();
-            assert_eq!(firstInitSCSource.get(), true);
+        #[ink::test]
+        fn balance_works() {
+            let contract = Erc20::new(100);
+            assert_eq!(contract.total_supply(), 100);
+            assert_eq!(contract.balance_of(AccountId::from([0x1; 32])), 100);
+            assert_eq!(contract.balance_of(AccountId::from([0x0; 32])), 0);
+        }
+
+        #[ink::test]
+        fn transfer_works() {
+            let mut contract = Erc20::new(100);
+            assert_eq!(contract.balance_of(AccountId::from([0x1; 32])), 100);
+            assert!(contract.transfer(AccountId::from([0x0; 32]), 10));
+            assert_eq!(contract.balance_of(AccountId::from([0x0; 32])), 10);
+            assert!(!contract.transfer(AccountId::from([0x0; 32]), 100));
         }
     }
 }
