@@ -5,12 +5,20 @@ use ink_lang as ink;
 #[ink::contract]
 mod erc20 {
     #[cfg(not(feature = "ink-as-dependency"))]
+    const DS_LIMIT: usize = 8;
+
     #[ink(storage)]
     pub struct Erc20 {
+        /// The total supply.
+        sc_owner: AccountId,
         /// The total supply.
         total_supply: Balance,
         /// The balance of each user.
         balances: ink_storage::collections::HashMap<AccountId, Balance>,
+        /// List of distribution accounts
+        ds_list: [AccountId; DS_LIMIT],
+        /// Number of distribution accounts
+        number_of_ds: u8,
     }
 
     #[ink(event)]
@@ -31,9 +39,10 @@ mod erc20 {
 
     impl Erc20 {
         #[ink(constructor)]
-        pub fn new(initial_supply: Balance) -> Self {
+        pub fn new(initial_supply: Balance, sc_owner: AccountId) -> Self {
             let caller = Self::env().caller();
             let mut balances = ink_storage::collections::HashMap::new();
+            let ds_list_temp = [sc_owner; DS_LIMIT];
             balances.insert(caller, initial_supply);
 
             Self::env().emit_event(Transfer {
@@ -43,8 +52,11 @@ mod erc20 {
             });
 
             Self {
+                sc_owner: caller,
                 total_supply: initial_supply,
-                balances
+                balances,
+                ds_list: ds_list_temp,
+                number_of_ds: 1,
             }
         }
 
@@ -61,6 +73,28 @@ mod erc20 {
         #[ink(message)]
         pub fn transfer(&mut self, to: AccountId, value: Balance) -> bool {
             self.transfer_from_to(self.env().caller(), to, value)
+        }
+
+        #[ink(message)]
+        pub fn get_distribution_accounts(&self) -> [AccountId; DS_LIMIT] {
+            self.ds_list
+        }
+
+        #[ink(message)]
+        pub fn add_distribution_account(&mut self, ds_address: AccountId) -> bool {
+            let caller = self.env().caller();
+            let saved_sc_owner = self.sc_owner;
+
+            if caller != saved_sc_owner {
+                return false;
+            }
+
+            let mut current_ds_list: [AccountId; DS_LIMIT] = self.ds_list;
+            let number_of_ds_variable: u8 = self.number_of_ds;
+            current_ds_list[usize::from(number_of_ds_variable)] = ds_address;
+            self.ds_list = current_ds_list;
+            self.number_of_ds = number_of_ds_variable + 1;
+            true
         }
 
         fn transfer_from_to(&mut self, from: AccountId, to: AccountId, value: Balance) -> bool {
@@ -88,7 +122,6 @@ mod erc20 {
         fn balance_of_or_zero(&self, owner: &AccountId) -> Balance {
             *self.balances.get(owner).unwrap_or(&0)
         }
-
     }
 
     #[cfg(test)]
@@ -99,25 +132,31 @@ mod erc20 {
 
         #[ink::test]
         fn new_works() {
-            let contract = Erc20::new(777);
-            assert_eq!(contract.total_supply(), 777);
+            let accounts = ink_env::test::default_accounts::<ink_env::DefaultEnvironment>()
+                .expect("Cannot get accounts");
+            let contract = Erc20::new(888, accounts.alice);
+            assert_eq!(contract.total_supply(), 888);
         }
 
         #[ink::test]
         fn balance_works() {
-            let contract = Erc20::new(100);
-            assert_eq!(contract.total_supply(), 100);
-            assert_eq!(contract.balance_of(AccountId::from([0x1; 32])), 100);
+            let accounts = ink_env::test::default_accounts::<ink_env::DefaultEnvironment>()
+                .expect("Cannot get accounts");
+            let contract = Erc20::new(888, accounts.alice);
+            assert_eq!(contract.total_supply(), 888);
+            assert_eq!(contract.balance_of(AccountId::from([0x1; 32])), 888);
             assert_eq!(contract.balance_of(AccountId::from([0x0; 32])), 0);
         }
 
         #[ink::test]
         fn transfer_works() {
-            let mut contract = Erc20::new(100);
-            assert_eq!(contract.balance_of(AccountId::from([0x1; 32])), 100);
-            assert!(contract.transfer(AccountId::from([0x0; 32]), 10));
-            assert_eq!(contract.balance_of(AccountId::from([0x0; 32])), 10);
-            assert!(!contract.transfer(AccountId::from([0x0; 32]), 100));
+            let accounts = ink_env::test::default_accounts::<ink_env::DefaultEnvironment>()
+                .expect("Cannot get accounts");
+            let mut contract = Erc20::new(888, accounts.alice);
+            assert_eq!(contract.balance_of(AccountId::from([0x1; 32])), 888);
+            assert!(contract.transfer(AccountId::from([0x0; 32]), 88), true);
+            assert_eq!(contract.balance_of(AccountId::from([0x0; 32])), 88);
+            assert_eq!(contract.balance_of(AccountId::from([0x1; 32])), 800);
         }
     }
 }
