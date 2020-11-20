@@ -31,6 +31,16 @@ mod erc20 {
         value: Balance,
     }
 
+    #[ink(event)]
+    pub struct ErrorDS {
+        #[ink(topic)]
+        from: Option<AccountId>,
+        #[ink(topic)]
+        to: Option<AccountId>,
+        #[ink(topic)]
+        value: Balance,
+    }
+
     // ACTION: Add an `Approval` event
     //         It should emit the following:
     //         * `owner` as an `AccountId`
@@ -39,10 +49,11 @@ mod erc20 {
 
     impl Erc20 {
         #[ink(constructor)]
-        pub fn new(initial_supply: Balance, ds_account: AccountId) -> Self {
+        pub fn new(initial_supply: Balance) -> Self {
             let caller = Self::env().caller();
             let mut balances = ink_storage::collections::HashMap::new();
-            let ds_list_temp = [ds_account; DS_LIMIT];
+            let ds_list_temp = [caller; DS_LIMIT];
+
             balances.insert(caller, initial_supply);
 
             Self::env().emit_event(Transfer {
@@ -98,9 +109,20 @@ mod erc20 {
         }
 
         fn transfer_from_to(&mut self, from: AccountId, to: AccountId, value: Balance) -> bool {
+            let ds_account_list = self.get_distribution_accounts();
+            if !ds_account_list.contains(&from) {
+                self.env().emit_event(ErrorDS {
+                    from: Some(from),
+                    to: Some(to),
+                    value,
+                });
+
+                return false;
+            }
+
             let from_balance = self.balance_of_or_zero(&from);
             if from_balance < value {
-                return false
+                return false;
             }
 
             // Update the sender's balance.
@@ -132,17 +154,13 @@ mod erc20 {
 
         #[ink::test]
         fn new_works() {
-            let accounts = ink_env::test::default_accounts::<ink_env::DefaultEnvironment>()
-                .expect("Cannot get accounts");
-            let contract = Erc20::new(888, accounts.alice);
+            let contract = Erc20::new(888);
             assert_eq!(contract.total_supply(), 888);
         }
 
         #[ink::test]
         fn balance_works() {
-            let accounts = ink_env::test::default_accounts::<ink_env::DefaultEnvironment>()
-                .expect("Cannot get accounts");
-            let contract = Erc20::new(888, accounts.alice);
+            let contract = Erc20::new(888);
             assert_eq!(contract.total_supply(), 888);
             assert_eq!(contract.balance_of(AccountId::from([0x1; 32])), 888);
             assert_eq!(contract.balance_of(AccountId::from([0x0; 32])), 0);
@@ -150,9 +168,7 @@ mod erc20 {
 
         #[ink::test]
         fn transfer_works() {
-            let accounts = ink_env::test::default_accounts::<ink_env::DefaultEnvironment>()
-                .expect("Cannot get accounts");
-            let mut contract = Erc20::new(888, accounts.alice);
+            let mut contract = Erc20::new(888);
             assert_eq!(contract.balance_of(AccountId::from([0x1; 32])), 888);
             assert!(contract.transfer(AccountId::from([0x0; 32]), 88), true);
             assert_eq!(contract.balance_of(AccountId::from([0x0; 32])), 88);
@@ -163,7 +179,7 @@ mod erc20 {
         fn get_distribution_accounts_works() {
             let accounts = ink_env::test::default_accounts::<ink_env::DefaultEnvironment>()
                 .expect("Cannot get accounts");
-            let contract = Erc20::new(888, accounts.alice);
+            let contract = Erc20::new(888);
             let ds_account_list = contract.get_distribution_accounts();
             assert_eq!(ds_account_list.len(), DS_LIMIT);
             assert_eq!(ds_account_list[0], accounts.alice);
@@ -173,7 +189,7 @@ mod erc20 {
         pub fn add_distribution_account_not_owner_works() {
             let accounts = ink_env::test::default_accounts::<ink_env::DefaultEnvironment>()
                 .expect("Cannot get accounts");
-            let mut contract = Erc20::new(888, accounts.bob);
+            let mut contract = Erc20::new(888);
             let ds_account_list = contract.get_distribution_accounts();
 
             assert!(contract.add_distribution_account(accounts.bob), true);
