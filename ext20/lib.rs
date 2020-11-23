@@ -19,6 +19,8 @@ mod erc20 {
         ds_list: [AccountId; DS_LIMIT],
         /// Number of distribution accounts
         number_of_ds: u8,
+        /// User list with time limit
+        time_limit_list: ink_storage::collections::HashMap<AccountId, u64>,
     }
 
     #[ink(event)]
@@ -52,6 +54,8 @@ mod erc20 {
         pub fn new(initial_supply: Balance) -> Self {
             let caller = Self::env().caller();
             let mut balances = ink_storage::collections::HashMap::new();
+            let time_limit_list = ink_storage::collections::HashMap::new();
+
             let ds_list_temp = [caller; DS_LIMIT];
 
             balances.insert(caller, initial_supply);
@@ -68,6 +72,7 @@ mod erc20 {
                 balances,
                 ds_list: ds_list_temp,
                 number_of_ds: 1,
+                time_limit_list,
             }
         }
 
@@ -105,6 +110,26 @@ mod erc20 {
             current_ds_list[usize::from(number_of_ds_variable)] = ds_address;
             self.ds_list = current_ds_list;
             self.number_of_ds = number_of_ds_variable + 1;
+            true
+        }
+
+        #[ink(message)]
+        pub fn get_issue_voucher(&self, user_address: AccountId) -> u64 {
+            *self.time_limit_list.get(&user_address).unwrap_or(&0)
+        }
+
+        #[ink(message)]
+        pub fn issue_voucher(
+            &mut self,
+            user_address: AccountId,
+            value: Balance,
+            time_limit: u64,
+        ) -> bool {
+            let caller = self.env().caller();
+
+            self.time_limit_list.insert(user_address, time_limit);
+            self.transfer_from_to(caller, user_address, value);
+
             true
         }
 
