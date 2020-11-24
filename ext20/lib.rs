@@ -43,6 +43,16 @@ mod erc20 {
         value: Balance,
     }
 
+    #[ink(event)]
+    pub struct IssueVoucher {
+        #[ink(topic)]
+        from: Option<AccountId>,
+        #[ink(topic)]
+        to: Option<AccountId>,
+        #[ink(topic)]
+        time_limit: u64,
+    }
+
     // ACTION: Add an `Approval` event
     //         It should emit the following:
     //         * `owner` as an `AccountId`
@@ -128,6 +138,12 @@ mod erc20 {
             let caller = self.env().caller();
 
             self.time_limit_list.insert(user_address, time_limit);
+            self.env().emit_event(IssueVoucher {
+                from: Some(caller),
+                to: Some(user_address),
+                time_limit: time_limit,
+            });
+
             self.transfer_from_to(caller, user_address, value);
 
             true
@@ -220,6 +236,26 @@ mod erc20 {
             assert!(contract.add_distribution_account(accounts.bob), true);
             assert_eq!(ds_account_list.len(), DS_LIMIT);
             assert_eq!(contract.number_of_ds, 2);
+        }
+
+        #[ink::test]
+        fn get_issue_voucher_works() {
+            let accounts = ink_env::test::default_accounts::<ink_env::DefaultEnvironment>()
+                .expect("Cannot get accounts");
+            let contract = Erc20::new(888);
+            let time_limit = contract.get_issue_voucher(accounts.alice);
+            assert_eq!(time_limit, 0);
+        }
+
+        #[ink::test]
+        pub fn issue_voucher_works() {
+            let accounts = ink_env::test::default_accounts::<ink_env::DefaultEnvironment>()
+                .expect("Cannot get accounts");
+            let mut contract = Erc20::new(888);
+           
+            assert!(contract.issue_voucher(accounts.bob, 100, 1000), true);
+            assert_eq!(contract.get_issue_voucher(accounts.bob), 1000);
+            assert_eq!(contract.balance_of(accounts.bob), 100);
         }
     }
 }
