@@ -1,19 +1,15 @@
-FROM phusion/baseimage:0.11 as builder
+# ===== FIRST STAGE ======
+FROM cereio/substrate20-builder as builder
 LABEL maintainer "team@cere.io"
-LABEL description="This is the build stage to create the binary."
+LABEL description="This is the temp builder."
 
 ARG PROFILE=release
 WORKDIR /cereio
 
 COPY . /cereio
 
-RUN apt-get update && \
-	apt-get upgrade -y && \
-	apt-get install -y cmake pkg-config libssl-dev git clang
-RUN curl https://sh.rustup.rs -sSf | sh -s -- -y && \
-        export PATH=$PATH:$HOME/.cargo/bin && \
-        scripts/init.sh && \
-        cargo +nightly-2020-10-06 build --$PROFILE
+RUN export PATH=$PATH:$HOME/.cargo/bin && \
+    cargo +nightly-2020-10-06 build --$PROFILE
 
 # ===== SECOND STAGE ======
 FROM phusion/baseimage:0.11
@@ -29,11 +25,11 @@ RUN mv /usr/share/ca* /tmp && \
 	useradd -m -u 1000 -U -s /bin/sh -d /cereio cereio && \
 	mkdir -p /cereio/.local/share/cereio && \
 	chown -R cereio:cereio /cereio/.local && \
-	ln -s /cereio/.local/share/node-template /data && \
+	ln -s /cereio/.local/share/cereio /data && \
 	rm -rf /usr/bin /usr/sbin
 
 USER cereio
 EXPOSE 30333 9933 9944
 VOLUME ["/data"]
 
-CMD ["/usr/local/bin/node-template"]
+CMD ["/usr/local/bin/node-template","--dev", "--ws-external"]
