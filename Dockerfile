@@ -29,7 +29,7 @@ RUN mv /usr/share/ca* /tmp && \
 	useradd -m -u 1000 -U -s /bin/sh -d /cereio cereio && \
 	mkdir -p /cereio/.local/share/cereio && \
 	chown -R cereio:cereio /cereio/.local && \
-	ln -s /cereio/.local/share/cereio /data && \
+	ln -s /cereio/.local/share/node-template /data && \
 	rm -rf /usr/bin /usr/sbin
 
 USER cereio
