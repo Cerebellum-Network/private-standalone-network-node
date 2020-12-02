@@ -1,5 +1,5 @@
 FROM phusion/baseimage:0.11 as builder
-LABEL maintainer "huythanh.nguyen@evizi.com"
+LABEL maintainer "team@cere.io"
 LABEL description="To create the builder image."
 
 ARG PROFILE=release

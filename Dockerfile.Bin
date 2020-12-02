@@ -1,6 +1,6 @@
 # ===== FIRST STAGE ======
 FROM cereio/substrate20-builder as builder
-LABEL maintainer "huythanh.nguyen@evizi.com"
+LABEL maintainer "team@cere.io"
 LABEL description="This is the temp builder."
 
 ARG PROFILE=release
@@ -13,7 +13,7 @@ RUN export PATH=$PATH:$HOME/.cargo/bin && \
 
 # ===== SECOND STAGE ======
 FROM phusion/baseimage:0.11
-LABEL maintainer "huythanh.nguyen@evizi.com"
+LABEL maintainer "team@cere.io"
 LABEL description="This is the optimization to create a small image."
 ARG PROFILE=release
 COPY --from=builder /cereio/target/$PROFILE/node-template /usr/local/bin
