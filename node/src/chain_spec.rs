@@ -158,9 +158,10 @@ fn testnet_genesis(
 		// Support pallet contract
 		pallet_contracts: Some(ContractsConfig {
 			current_schedule: pallet_contracts::Schedule {
-							enable_println,
-							..Default::default()
+				enable_println,
+				..Default::default()
 			},
+			call_base_fee: 0,
 		}),
 		// End Support pallet contract
 	}
