@@ -160,7 +160,7 @@ fn testnet_genesis(
 			key: root_key,
 		}),
 		// Support pallet contract
-		pallet_contracts: Some(ContractsConfig {
+		contract: Some(ContractsConfig {
 			contract_fee: 1 * CENTS,
 			call_base_fee: 0,
 			create_base_fee: 1000,
