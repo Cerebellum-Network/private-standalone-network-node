@@ -169,7 +169,7 @@ fn testnet_genesis(
 				call_base_cost: 0,
 				instantiate_base_cost: 200000,
 				transfer_cost: 0,
-				instantiate_cost, 200000,
+				instantiate_cost: 200000,
 				enable_println,
 				..Default::default()
 			},
