@@ -162,6 +162,14 @@ fn testnet_genesis(
 		// Support pallet contract
 		pallet_contracts: Some(ContractsConfig {
 			current_schedule: pallet_contracts::Schedule {
+				grow_mem_cost: 200000,
+				regular_op_cost: 200000,
+				event_base_cost: 0,
+				put_code_per_byte_cost: 200000,
+				call_base_cost: 0,
+				instantiate_base_cost: 200000,
+				transfer_cost: 0,
+				instantiate_cost, 200000,
 				enable_println,
 				..Default::default()
 			},
