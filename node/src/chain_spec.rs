@@ -167,14 +167,5 @@ fn testnet_genesis(
 			},
 		}),
 		// End Support pallet contract
-		contract: Some(ContractConfig {
-			contract_fee: 1 * CENTS,
-			call_base_fee: 0,
-			create_base_fee: 1000,
-			gas_price: 1 * MILLICENTS,
-			max_depth: 1024,
-			block_gas_limit: 10_000_000,
-			current_schedule: Default::default(),
-		}),
 	}
 }
