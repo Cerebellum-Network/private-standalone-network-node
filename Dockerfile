@@ -28,6 +28,7 @@ RUN mv /usr/share/ca* /tmp && \
 	rm -rf /usr/lib/python* && \
 	useradd -m -u 1000 -U -s /bin/sh -d /cereio cereio && \
 	mkdir -p /cereio/.local/share/cereio && \
+	mkdir -p /cereio/.local/share/node-template && \
 	chown -R cereio:cereio /cereio/.local && \
 	ln -s /cereio/.local/share/node-template /data && \
 	rm -rf /usr/bin /usr/sbin
