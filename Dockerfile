@@ -1,5 +1,5 @@
 FROM phusion/baseimage:0.11 as builder
-LABEL maintainer "team@cere.io"
+LABEL maintainer="team@cere.io"
 LABEL description="This is the build stage to create the binary."
 
 ARG PROFILE=release
@@ -17,7 +17,7 @@ RUN curl https://sh.rustup.rs -sSf | sh -s -- -y && \
 
 # ===== SECOND STAGE ======
 FROM phusion/baseimage:0.11
-LABEL maintainer "team@cere.io"
+LABEL maintainer="team@cere.io"
 LABEL description="This is the optimization to create a small image."
 ARG PROFILE=release
 COPY --from=builder /cereio/target/$PROFILE/node-template /usr/local/bin
