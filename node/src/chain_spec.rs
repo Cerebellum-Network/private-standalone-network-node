@@ -183,7 +183,7 @@ fn testnet_genesis(
 				max_table_size: 16384,
 				enable_println: true,
 				max_subject_len: 32,
-				max_code_size: 32,
+				max_code_size: 4000000000,
 			},
 		}),
 		// End Support pallet contract
