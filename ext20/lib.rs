@@ -124,7 +124,7 @@ mod erc20 {
         }
 
         #[ink(message)]
-        pub fn get_issue_voucher(&self, user_address: AccountId) -> u64 {
+        pub fn get_issue_restrictive_asset(&self, user_address: AccountId) -> u64 {
             *self.time_limit_list.get(&user_address).unwrap_or(&0)
         }
 
@@ -244,22 +244,22 @@ mod erc20 {
         }
 
         #[ink::test]
-        fn get_issue_voucher_works() {
+        fn get_issue_restrictive_asset_works() {
             let accounts = ink_env::test::default_accounts::<ink_env::DefaultEnvironment>()
                 .expect("Cannot get accounts");
             let contract = Erc20::new(888);
-            let time_limit = contract.get_issue_voucher(accounts.alice);
+            let time_limit = contract.get_issue_restrictive_asset(accounts.alice);
             assert_eq!(time_limit, 0);
         }
 
         #[ink::test]
-        pub fn issue_voucher_works() {
+        pub fn issue_restrictive_asset_works() {
             let accounts = ink_env::test::default_accounts::<ink_env::DefaultEnvironment>()
                 .expect("Cannot get accounts");
             let mut contract = Erc20::new(888);
            
             assert!(contract.issue_restricted_asset(accounts.bob, 100, true, 1000), true);
-            assert_eq!(contract.get_issue_voucher(accounts.bob), 1000);
+            assert_eq!(contract.get_issue_restrictive_asset(accounts.bob), 1000);
             assert_eq!(contract.balance_of(accounts.bob), 100);
         }
     }
