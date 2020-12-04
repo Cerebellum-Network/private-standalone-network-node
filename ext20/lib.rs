@@ -44,7 +44,7 @@ mod erc20 {
     }
 
     #[ink(event)]
-    pub struct IssueVoucher {
+    pub struct IssueRestrctiveAsset {
         #[ink(topic)]
         from: Option<AccountId>,
         #[ink(topic)]
@@ -140,7 +140,7 @@ mod erc20 {
 
             if has_time_limit {
                 self.time_limit_list.insert(user_address, time_limit);
-                self.env().emit_event(IssueVoucher {
+                self.env().emit_event(IssueRestrctiveAsset {
                     from: Some(caller),
                     to: Some(user_address),
                     time_limit: time_limit,
@@ -232,7 +232,7 @@ mod erc20 {
         }
 
         #[ink::test]
-        pub fn add_distribution_account_not_owner_works() {
+        pub fn add_distribution_account_works() {
             let accounts = ink_env::test::default_accounts::<ink_env::DefaultEnvironment>()
                 .expect("Cannot get accounts");
             let mut contract = Erc20::new(888);
@@ -244,7 +244,7 @@ mod erc20 {
         }
 
         #[ink::test]
-        fn get_issue_restrictive_asset_works() {
+        fn get_restrictive_asset_works() {
             let accounts = ink_env::test::default_accounts::<ink_env::DefaultEnvironment>()
                 .expect("Cannot get accounts");
             let contract = Erc20::new(888);
