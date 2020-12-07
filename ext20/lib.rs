@@ -9,7 +9,7 @@ mod erc20 {
 
     #[ink(storage)]
     pub struct Erc20 {
-        /// The total supply.
+        /// Smart Contract Owner Account.
         sc_owner: AccountId,
         /// The total supply.
         total_supply: Balance,
