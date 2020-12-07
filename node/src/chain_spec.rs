@@ -10,10 +10,6 @@ use sp_finality_grandpa::AuthorityId as GrandpaId;
 use sp_runtime::traits::{Verify, IdentifyAccount};
 use sc_service::ChainType;
 
-const MILLICENTS: u128 = 1_000_000_000;
-const CENTS: u128 = 1_000 * MILLICENTS;    // assume this is worth about a cent.
-const DOLLARS: u128 = 100 * CENTS;
-
 // The URL for the telemetry server.
 // const STAGING_TELEMETRY_URL: &str = "wss://telemetry.polkadot.io/submit/";
 
