@@ -1,52 +1,17 @@
-# cere-substrate
-### Build docker file
-```bash
-docker build . -t thanh/substrate20
-```
-### Run builded docker file
-```bash
-docker run -d -P --name cerenode thanh/substrate20
-```
+# Turn-key Private Blockchain Network
 
-### Run in Docker by docker compose
-First, install [Docker](https://docs.docker.com/get-docker/) and
-[Docker Compose](https://docs.docker.com/compose/install/).
+This is a turn-key Private/Permissioned/Standalone blockchain network which can be readily integrated by any enterprise. Since it’s built with Substrate, this network can be integrated into any Polkadot/Substrate based Layer 1 network to serve as a secondary chain.
 
-Then run the following command to start a single node development chain.
+This turn-key network intends to abstract the implementation complexity for businesses, as well as providing a ready-made package to optimize for a higher level of security, privacy, and performance, and to serve as a template or base-implementation of a highly customizable and performant enterprise specific blockchain network.
 
-```bash
-./scripts/docker_run.sh
-```
+## Documentation
+Documentation of the code's layout and abstractions, as well as for the functionality available, can be found in [./docs](./docs).
 
-This command will firstly compile your code, and then start a local development network. You can
-also replace the default command (`cargo build --release && ./target/release/node-template --dev --ws-external`)
-by appending your own. A few useful ones are as follow.
+## Installation
+See [Installation](./docs/deployment.md)
 
-```bash
-# Run Substrate node without re-compiling
-./scripts/docker_run.sh ./target/release/node-template --dev --ws-external
+## Contributing
+See [Contributing](./docs/contribution.md)
 
-# Run Substrate node without re-compiling with rpc
-./scripts/docker_run.sh ./target/release/node-template --dev --ws-external --rpc-external
-
-# Purge the local dev chain
-./scripts/docker_run.sh ./target/release/node-template purge-chain --dev
-
-# Check whether the code is compilable
-./scripts/docker_run.sh cargo check
-```
-
-# Ssh to container:
-```bash
-docker exec -it "containerName" /bin/bash
-```
-
-# Build:
-```bash
-cargo build --release
-```
-
-# Run dev:
-```bash
-./target/release/node-template --dev --tmp
-```
+## Running tests
+See [running tests](./docs/tests.md)
