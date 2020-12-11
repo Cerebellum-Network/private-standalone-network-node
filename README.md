@@ -67,13 +67,13 @@ There will be three primary directories in this repository:
 | 5.  | Article | The main topic/theme: “...Cere Network is providing a turn-key permissioned standalone blockchain network which can be readily integrated by any enterprise. Since it’s built with Substrate, this network can be potentially integrated into any Polkadot/Substrate based Layer 1 network to serve as a secondary chain. Furthermore, any network built from or derived from this project will also be able to use derivative assets to represent real-world value transfers on-chain (e.g. micropayments, discount vouchers, loyalty points, etc), as well as being able to programatically issue these assets between user and application wallets... |   Pending |
 
 ## Documentation
-This repository consist of a [new smart contract standard](./../ext20/lib.rs) which allows assets adaptable for real businesses to be programmatically created, managed, owned, transferred, and traded. It provides a template for establishing a foundation to capture common enterprise utility, and can be easily extended.. This standard is purposefully being built on top of Parity’s ink! Smart contract framework.
+This repository consist of a [new smart contract standard](./ext20/lib.rs) which allows assets adaptable for real businesses to be programmatically created, managed, owned, transferred, and traded. It provides a template for establishing a foundation to capture common enterprise utility, and can be easily extended.. This standard is purposefully being built on top of Parity’s ink! Smart contract framework.
 
 ### Supported features
-* [Derivative Assets](./derivative_assets.md)
-* [Direct Wallet Transfer](./direct_wallet_transfer.md)
-* [Automated Token Transfer](./automated_token_transfer.md)
-* [Asset Restrictions](./asset_restrictions.md)
+* [Derivative Assets](./docs/derivative_assets.md)
+* [Direct Wallet Transfer](./docs/direct_wallet_transfer.md)
+* [Automated Token Transfer](./docs/automated_token_transfer.md)
+* [Asset Restrictions](./docs/asset_restrictions.md)
 
 
 ## Installation
