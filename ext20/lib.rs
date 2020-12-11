@@ -3,12 +3,12 @@
 use ink_lang as ink;
 
 #[ink::contract]
-mod erc20 {
+mod cereAssets {
     #[cfg(not(feature = "ink-as-dependency"))]
     const DS_LIMIT: usize = 8;
 
     #[ink(storage)]
-    pub struct Erc20 {
+    pub struct CereAssets {
         /// Smart Contract Owner Account.
         sc_owner: AccountId,
         /// The total supply.
@@ -59,7 +59,7 @@ mod erc20 {
     //         * `spender` as an `AccountId`
     //         * `value` as a `Balance`
 
-    impl Erc20 {
+    impl CereAssets {
         #[ink(constructor)]
         pub fn new(initial_supply: Balance) -> Self {
             let caller = Self::env().caller();
@@ -200,13 +200,13 @@ mod erc20 {
 
         #[ink::test]
         fn new_works() {
-            let contract = Erc20::new(888);
+            let contract = CereAssets::new(888);
             assert_eq!(contract.total_supply(), 888);
         }
 
         #[ink::test]
         fn balance_works() {
-            let contract = Erc20::new(888);
+            let contract = CereAssets::new(888);
             assert_eq!(contract.total_supply(), 888);
             assert_eq!(contract.balance_of(AccountId::from([0x1; 32])), 888);
             assert_eq!(contract.balance_of(AccountId::from([0x0; 32])), 0);
@@ -214,7 +214,7 @@ mod erc20 {
 
         #[ink::test]
         fn transfer_works() {
-            let mut contract = Erc20::new(888);
+            let mut contract = CereAssets::new(888);
             assert_eq!(contract.balance_of(AccountId::from([0x1; 32])), 888);
             assert!(contract.transfer(AccountId::from([0x0; 32]), 88), true);
             assert_eq!(contract.balance_of(AccountId::from([0x0; 32])), 88);
@@ -225,7 +225,7 @@ mod erc20 {
         fn get_distribution_accounts_works() {
             let accounts = ink_env::test::default_accounts::<ink_env::DefaultEnvironment>()
                 .expect("Cannot get accounts");
-            let contract = Erc20::new(888);
+            let contract = CereAssets::new(888);
             let ds_account_list = contract.get_distribution_accounts();
             assert_eq!(ds_account_list.len(), DS_LIMIT);
             assert_eq!(ds_account_list[0], accounts.alice);
@@ -235,7 +235,7 @@ mod erc20 {
         pub fn add_distribution_account_works() {
             let accounts = ink_env::test::default_accounts::<ink_env::DefaultEnvironment>()
                 .expect("Cannot get accounts");
-            let mut contract = Erc20::new(888);
+            let mut contract = CereAssets::new(888);
             let ds_account_list = contract.get_distribution_accounts();
 
             assert!(contract.add_distribution_account(accounts.bob), true);
@@ -247,7 +247,7 @@ mod erc20 {
         fn get_restrictive_asset_works() {
             let accounts = ink_env::test::default_accounts::<ink_env::DefaultEnvironment>()
                 .expect("Cannot get accounts");
-            let contract = Erc20::new(888);
+            let contract = CereAssets::new(888);
             let time_limit = contract.get_issue_restrictive_asset(accounts.alice);
             assert_eq!(time_limit, 0);
         }
@@ -256,7 +256,7 @@ mod erc20 {
         pub fn issue_restrictive_asset_works() {
             let accounts = ink_env::test::default_accounts::<ink_env::DefaultEnvironment>()
                 .expect("Cannot get accounts");
-            let mut contract = Erc20::new(888);
+            let mut contract = CereAssets::new(888);
            
             assert!(contract.issue_restricted_asset(accounts.bob, 100, true, 1000), true);
             assert_eq!(contract.get_issue_restrictive_asset(accounts.bob), 1000);
