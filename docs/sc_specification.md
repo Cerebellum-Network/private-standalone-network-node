@@ -1,15 +1,15 @@
 # A Standard For Real-world App Assets On Ink!
 
 ### Table Of Contents
-[Abstract]()
+[Abstract](#abstract)
 
-[Summary]()
+[Summary](#summary)
 
-[Specification]()
+[Specification](#specification)
 
-[Asset Creation]()
+[Asset Creation](#asset-creation)
 
-[Asset Distribution]()
+[Asset Distribution](#asset-distribution)
 
 * [transfer]()
 
@@ -19,7 +19,7 @@
 
 * [issueRestrictedAsset]()
 
-[Utility Methods]()
+[Utility Methods](#utility-methods)
 
 * [name]()
 
@@ -32,7 +32,7 @@
 * [balanceOf]()
 
 
-[Test Cases]()
+[Test Cases](#test-cases)
 
 * [newWorks]()
 
@@ -48,9 +48,7 @@
 
 * [issueRestrictiveAssetWorks]()
 	
-[Events]()
-
-[Implementation]()
+[Events](#events)
 
 
 #### Abstract
@@ -170,7 +168,7 @@ pub fn balance_of
 
 
 #### Test Cases
- newWorks
+ **newWorks**
  
 Test to check if the new instance of the Smart Contract successfully, the test runs by asserting an instance of the Smart Contract and initializing the values in the Constructor.
 

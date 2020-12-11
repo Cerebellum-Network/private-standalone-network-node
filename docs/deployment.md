@@ -2,11 +2,11 @@
 
 ### Build docker file
 ```bash
-docker build . -t cere/substrate20
+docker build . -t cerebellumnetwork/turnkey-private-blockchain-network
 ```
 ### Run builded docker file
 ```bash
-docker run -d -P --name cerenode cere/substrate20
+docker run -d -P --name cerenode cerebellumnetwork/turnkey-private-blockchain-network
 ```
 
 ### Run in Docker by docker compose
