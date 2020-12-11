@@ -1,12 +1,13 @@
 # How to deploy
 
-### Build docker file
-```bash
-docker build . -t cerebellumnetwork/turnkey-private-blockchain-network
-```
-### Run builded docker file
+### Run public docker image
 ```bash
 docker run -d -P --name cerenode cerebellumnetwork/turnkey-private-blockchain-network
+```
+
+### Build locally
+```bash
+docker build .
 ```
 
 ### Run in Docker by docker compose
@@ -37,17 +38,12 @@ by appending your own. A few useful ones are as follow.
 ./scripts/docker_run.sh cargo check
 ```
 
-# Ssh to container:
-```bash
-docker exec -it "containerName" /bin/bash
-```
-
-# Build:
+# Build from source:
 ```bash
 cargo build --release
 ```
 
-# Run dev:
+# Run for the development:
 ```bash
 ./target/release/node-template --dev --tmp
 ```
