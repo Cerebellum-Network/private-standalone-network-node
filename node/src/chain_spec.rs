@@ -156,31 +156,10 @@ fn testnet_genesis(
 			key: root_key,
 		}),
 		// Support pallet contract
-		// event_base_cost, call_base_cost and transfer_cost have been modified, to enable an important feature to allow enterprises to conduct value transfers between app/user accounts without worrying about fees.
 		pallet_contracts: Some(ContractsConfig {
 			current_schedule: pallet_contracts::Schedule {
-				version: 0,
-				put_code_per_byte_cost: 500000,
-				grow_mem_cost: 500000,
-				regular_op_cost: 500000,
-				return_data_per_byte_cost: 500000,
-				event_data_per_byte_cost: 500000,
-				event_per_topic_cost: 500000,
-				event_base_cost: 0, // Event Gas cost to deposit an event; the base. Modified: 0, Default: 500000
-				call_base_cost: 0, // Smart Contract Base gas cost to call into a contract. Modified: 0, Default: 67500000
-				instantiate_base_cost: 87500000,
-				dispatch_base_cost: 67500000,
-				sandbox_data_read_cost: 500000,
-				sandbox_data_write_cost: 500000,
-				transfer_cost: 0, // Transfer Cost for a simple balance transfer. Modified: 0, Default: 50000000
-				instantiate_cost: 100000000,
-				max_event_topics: 4,
-				max_stack_height: 65536,
-				max_memory_pages: 16,
-				max_table_size: 16384,
-				enable_println: true,
-				max_subject_len: 32,
-				max_code_size: 4000000000,
+				enable_println,
+				..Default::default()
 			},
 		}),
 		// End Support pallet contract
