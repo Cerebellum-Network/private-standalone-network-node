@@ -67,7 +67,14 @@ There will be three primary directories in this repository:
 | 4.  | Tutorial | Cere will provide written documentation as well as a video tutorial on how to integrate and use Cere’s turnkey private blockchain networks for applications to showcase the ease of use. | Pending |
 
 ## Documentation
-Documentation of the code's layout and abstractions, as well as for the functionality available, can be found in [./docs](./docs).
+This repository consist of a [new smart contract standard](./../ext20/lib.rs) which allows assets adaptable for real businesses to be programmatically created, managed, owned, transferred, and traded. It provides a template for establishing a foundation to capture common enterprise utility, and can be easily extended.. This standard is purposefully being built on top of Parity’s ink! Smart contract framework.
+
+### Supported features
+* [Derivative Assets](./derivative_assets.md)
+* [Direct Wallet Transfer](./direct_wallet_transfer.md)
+* [Automated Token Transfer](./automated_token_transfer.md)
+* [Asset Restrictions](./asset_restrictions.md)
+
 
 ## Installation
 See [Installation](./docs/deployment.md)
