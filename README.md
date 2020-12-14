@@ -33,9 +33,9 @@ Below we have the overview of all the key features that this project will suppor
     └── Derivative Assets Smart Contract (./cere01)
 	     └── Interface (./specification)
 	     └── Implementation (./cere01/src/lib.rs)
-           ├── Derivative Assets
-           ├── Token Locking Support
-           ├── Application Wallet to Wallet Transfer Cere token function
+         ├── Derivative Assets
+         ├── Token Locking Support
+         ├── Application Wallet to Wallet Transfer Cere token function
 	     └── Tests
 ```
 
