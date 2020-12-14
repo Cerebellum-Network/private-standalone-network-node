@@ -18,17 +18,25 @@ Below we have the overview of all the key features that this project will suppor
 
 ### Repository Hierarchy:
 ```bash
-├── Turn-key Private Standalone Network Node
-    ├── Cere Pallet
-    │   │── Smart Contract
-    │   │    ├──Derivative Assets
-    │   │    ├──Token Locking Support
-    │   │    ├──Application Wallet to Wallet Transfer function
-    │   └── Off-chain Worker
-    ├── Cere Runtime Module
-    ├── Substrate API Interface
-    ├── Packaging & Deployment Scripts
-    └── Tests & Tools 
+├── Turn-key Private Standalone Network Node (url)
+│   ├── Cere Node (./node)
+│   ├── Packaging & Deployment Scripts (./scrips)
+│   ├── Cere Pallets (./pallets)
+│   │	    └── Transfer Data Pallet [future] (./pallets/send-data)
+│   │    	    └── Send data (string) between 2 wallet accounts
+│   └── Cere Runtime Module (./runtime)
+│    	    ├── Run all of official base pallets that public by Substrate
+│   	    │     └── Run Substrate Smart Contract Pallet
+│    	    └── Run Cere Transfer Data Pallet
+│
+└── Cere Smart Contracts 
+    └── Derivative Assets Smart Contract (./cere01)
+	     └── Interface (./specification)
+	     └── Implementation (./cere01/src/lib.rs)
+           ├── Derivative Assets
+           ├── Token Locking Support
+           ├── Application Wallet to Wallet Transfer Cere token function
+	     └── Tests
 ```
 
 There will be three primary directories in this repository:   
