@@ -31,7 +31,7 @@ Below we have the overview of all the key features that this project will suppor
 │
 └── Cere Smart Contracts [link](https://github.com/Cerebellum-Network/cere-smart-contracts)
     └── Derivative Assets Smart Contract (./cere01)
-         └── Standard (./specification)
+         └── CERE01 Standard (./specification)
          └── Implementation (./cere01/src/lib.rs)
                 ├── Derivative Assets
                 ├── Token Locking Support
