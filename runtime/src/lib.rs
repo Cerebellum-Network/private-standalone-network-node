@@ -41,8 +41,8 @@ pub use frame_support::{
 // Support pallet contract
 use pallet_contracts_rpc_runtime_api::ContractExecResult;
 
-/// Import the template pallet.
-pub use pallet_template;
+/// Import the send data pallet.
+pub use pallet_send_data;
 
 /// An index to a block.
 pub type BlockNumber = u32;
@@ -305,10 +305,8 @@ parameter_types! {
 	pub const MaxNickLength: usize = usize::MAX;
 }
 
-/// Configure the template pallet in pallets/template.
-impl pallet_template::Trait for Runtime {
-	// The Balances pallet implements the ReservableCurrency trait.
-
+/// Configure the send data pallet in pallets/template.
+impl pallet_send_data::Trait for Runtime {
 	// Use the MinNickLength from the parameter_types block.
 	type MinLength = MinNickLength;
 
@@ -335,7 +333,7 @@ construct_runtime!(
 		TransactionPayment: pallet_transaction_payment::{Module, Storage},
 		Sudo: pallet_sudo::{Module, Call, Config<T>, Storage, Event<T>},
 		// Include the custom logic from the template pallet in the runtime.
-		TemplateModule: pallet_template::{Module, Call, Storage, Event<T>},
+		SendDataModule: pallet_send_data::{Module, Call, Storage, Event<T>},
 		// Support pallet contract
 		Contracts: pallet_contracts::{Module, Call, Config, Storage, Event<T>},
 	}
