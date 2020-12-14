@@ -3,7 +3,7 @@
 ### Description 
  Derivative Asset support for the enterprise needs, with attributes such as expiration, limit on transfers, longitudinal unlocking, redemptions, etc.
  
-## How to create and deploy Smart Contract to the Network   
+## How to build and deploy Smart Contract to the Network   
 ### 1. Create Smart Contract artifacts
 Follow [this](./create_sc_artifacts.md) link to create Smart Contract artifacts
 ### 2. Upload artifacts (wasm and metadata files) first
