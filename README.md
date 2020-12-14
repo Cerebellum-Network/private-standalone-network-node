@@ -17,8 +17,8 @@ Below we have the overview of all the key features that this project will suppor
 * Optimization of batch user onboarding and transaction processing for higher throughput situations needed for consumer apps/sites.
 
 ### Repository Hierarchy:
-```bash
-├── Turn-key Private Standalone Network Node (url)
+```
+├── Turn-key Private Standalone Network Node [link](https://github.com/Cerebellum-Network/turnkey-private-blockchain-network)
 │   ├── Cere Node (./node)
 │   ├── Packaging & Deployment Scripts (./scrips)
 │   ├── Cere Pallets (./pallets)
@@ -29,7 +29,7 @@ Below we have the overview of all the key features that this project will suppor
 │   	    │     └── Run Substrate Smart Contract Pallet
 │    	    └── Run Cere Transfer Data Pallet
 │
-└── Cere Smart Contracts 
+└── Cere Smart Contracts [link](https://github.com/Cerebellum-Network/cere-smart-contracts)
     └── Derivative Assets Smart Contract (./cere01)
          └── Interface (./specification)
          └── Implementation (./cere01/src/lib.rs)
