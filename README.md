@@ -23,14 +23,14 @@ Below we have the overview of all the key features that this project will suppor
 │   ├── Packaging & Deployment Scripts (./scrips)
 │   ├── Cere Pallets (./pallets)
 │   │	    └── Transfer Data Pallet [future] (./pallets/send-data)
-│   │    	    └── Send data (string) between 2 wallet accounts
+│   │    	    └── Cere DDC service connector
 │   └── Cere Runtime Module (./runtime)
-│    	    ├── Run all of official base pallets that public by Substrate
-│   	    │     └── Run Substrate Smart Contract Pallet
-│    	    └── Run Cere Transfer Data Pallet
+│    	    ├── Included official base pallets that public by Substrate
+│   	    │     └── Added Substrate Smart Contract Pallet
+│    	    └── Included custom Cere Data Transfer Pallet
 │
 └── Cere Smart Contracts [link](https://github.com/Cerebellum-Network/cere-smart-contracts)
-    └── Derivative Assets Smart Contract (./cere01)
+    └── Enterprise Assets (./cere01)
          └── CERE01 Standard (./specification)
          └── Implementation (./cere01/src/lib.rs)
                 ├── Derivative Assets
