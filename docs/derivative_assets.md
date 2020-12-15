@@ -1,4 +1,4 @@
-# Derivative Assets
+# Enterprise Derivative Assets
 
 ### Description 
  Derivative Asset support for the enterprise needs, with attributes such as expiration, limit on transfers, longitudinal unlocking, redemptions, etc.
