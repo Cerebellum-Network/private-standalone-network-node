@@ -1,0 +1,9 @@
+version: "3.2"
+
+services:
+  local-private-blockchain-network:
+    container_name: turnkey-private-blockchain-network
+    image: cerebellumnetwork/turnkey-private-blockchain-network
+    ports:
+      - "9944:9944"
+    command: bash -c "node-template --dev --ws-external"

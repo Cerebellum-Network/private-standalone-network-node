@@ -83,6 +83,8 @@ This repository consist of a [new smart contract standard](./ext20/lib.rs) which
 * [Automated Token Transfer](./docs/automated_token_transfer.md)
 * [Asset Restrictions](./docs/asset_restrictions.md)
 
+## Tutorial
+See [Tutorial](./docs/tutorial.md)
 
 ## Installation
 See [Installation](./docs/deployment.md)
