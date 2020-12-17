@@ -1,3 +1,3 @@
 # How to contribute
 
-Todo ...
+Will be added in Milestone 2

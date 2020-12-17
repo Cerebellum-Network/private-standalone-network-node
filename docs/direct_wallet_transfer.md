@@ -1,5 +1,5 @@
 # Direct Wallet Transfer
-Support for most Substrate/Polkadot based wallet applications. Smart Contract transfer function allows for the directly wallet-signed transfer of assets from one application/user address to the other.
+Support for the most Substrate/Polkadot based wallet applications. Smart Contract transfer function allows for the directly wallet-signed transfer of assets from application's address (distribution account) to the user's address and vice versa. There is also a possibility to add more wallets (distribution accounts) to the "White List".
 
 ### Steps to make a transfer
 * Check token balance before transfer for Dave. It equals 0.
