@@ -1,12 +1,13 @@
-# Asset Restrictions 
+# Asset Restrictions
 Support for the locking of assets by time or by issuer permission, support for expirations and potentially invalidations.
 
-### Supported features
+### Initially Supported features
 * Distribution management
-* Assets expiration
+* Derivative assets expiration
+* invalidation post-issurance (not in current scope)
 
 #### Distribution management
-Transfer function adds the ability to transfer tokens between User accounts and Application and vice versa. In order to add more distribution wallets to enable application to user account transfers, `addDistributionAccount` function will allow to have multiple distribution wallets that can be used. In order to get a list of distribution accounts, `getDistributionAccounts` function should be used. 
+By default, the transfer of assets are limited to between an User account and an Application account only and vice versa, this is to limit secondary market for assets beyond an enterprise's control. More distribution wallets can be added to an application to facilitate such transfers, so that distribution wallets that can be used by the application are manageable by the asset issuer.
 
-#### Assets expiration
-A possibility to allow the issuing of vouchers and adds a time limit for an asset (expiration date) Expiration is associated with the asset at the time of issuance. In order to issue restricted asset, `issueRestrictedAsset` function should be used.
+#### Derivative assets expiration
+A possibility to allow the issuing of assets that represent in-app rewards and discount vouchers with time limitations (e.g. expiration date on a coupon). Expiration is associated with the asset at the time of issuance.
