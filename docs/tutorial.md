@@ -1,4 +1,4 @@
-# Tutorial
+# Quick Start Guide
 
 1. Let's up and run single blockchain node in order to play with it. You can use Cerebellum Network private docker image:
 ```bash
