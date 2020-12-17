@@ -61,7 +61,7 @@ There will be three primary directories in this repository:
 
 | Number | Deliverable | Specification | Status |
 | ------------- | ------------- | ------------- | ------- |
-| 1.  | Supporting Fee Abastraction | This is an important feature to allow enterprises to conduct value transfers between app/user accounts without worrying about fees. | In Progress |  
+| 1.  | Supporting Fee Abastraction | This is an important feature to allow enterprises to conduct value transfers between app/user accounts without worrying about fees. This was moved from milestone 1 to milestone 2 to allow more testing with a couple of different approaches. | In Progress |  
 | 2.  | Deployment packaging | At minimum the docker container or even the entire script that packages the container with the latest code from Substrate will also run on CI to test the deliverables of the milestone. |  Pending |
 | 3.  | Testing | Repositories including the  deployment and test sections for instructions and scripts to help contributors thatto package, deploy, run, test. | Pending |
 | 4.  | (optional) Batch processing | Allowing an app to optimize for creating asset transfers or data events to a batch of users at once, this would be a very nice to have from our practical experience. | Pending |
