@@ -18,23 +18,19 @@ Below we have the overview of all the key features that this project will suppor
 
 ### Repository Hierarchy:
 ```
-├── Private Standalone Network (PSN) Node [link](https://github.com/Cerebellum-Network/turnkey-private-blockchain-network)
-│   ├── PSN Node (./node)
-│   ├── Packaging & Deployment Scripts (./scrips)
-│   ├── PSN Pallets (./pallets)
-│   │	    └── Transfer Data Pallet [future] (./pallets/send-data)
-│   │    	    └── Cere DDC service connector
-│   └── PSN Runtime Module (./runtime)
-│    	    └── Included custom Cere Data Transfer Pallet
+├── Private Standalone Network (PSN) Node [link](https://github.com/Cerebellum-Network/private-standalone-network-node)
+│   ├── [./node] PSN Node
+│   ├── [./scripts] Packaging & Deployment Scripts 
+│   ├── [./pallets] PSN Pallets
+│   │	    └── [./pallets/cere-ddc] Transfer Data Pallet (future)
+│   │    	        └── Cere DDC service connector
+│   └── [./runtime] PSN Runtime Module
+│    	    └── Included custom Cere DDC Pallet
 │
-└── Smart Contracts [link](https://github.com/Cerebellum-Network/cere-smart-contracts)
-    └── Enterprise Derivative Assets (./cere01)
-         └── CERE01 Standard (./specification)
-         └── Implementation (./cere01/src/lib.rs)
-                ├── Enterprise Derivative Assets
-                ├── Token Locking Support
-                ├── Application Wallet to Wallet Transfer Cere token function
-                └── Tests
+└── Cere Enterprise Smart Contracts [link](https://github.com/Cerebellum-Network/cere-enterprise-smart-contracts)
+    └── [./cere01] Enterprise Derivative Assets
+         └── [./cere01/specification] CERE01 Standard
+         └── [./cere01/lib.rs] Implementation, Tests
 ```
 
 There will be three primary directories in this repository:   
@@ -52,13 +48,13 @@ There will be three primary directories in this repository:
 
 | Number | Deliverable | Specification | Status |
 | ------------- | ------------- | ------------- | ----- |
-| 1. | [Documentation](https://github.com/Cerebellum-Network/turnkey-private-blockchain-network#documentation) and [basic tests](https://github.com/Cerebellum-Network/turnkey-private-blockchain-network/blob/dev/docs/deployment.md) | We will provide README files inside repositories with instructions of how to build, deploy and test. |  Done |
-| 2.  | [Ink! based Smart Contract Standard](https://github.com/Cerebellum-Network/cere-smart-contracts#specification) | We are introducing a new smart contract standard which allows assets adaptable for real businesses to be programmatically created, managed, owned, transferred, and traded. It provides a template for establishing a foundation to capture common enterprise utility, and can be easily extended.. This standard is purposefully being built on top of Parity’s ink! Smart contract framework. | Done |
-| 2a.  | [Enterprise Derivative Assets](https://github.com/Cerebellum-Network/cere-smart-contracts#specification) | Derivative Asset support for the enterprise needs, with attributes such as expiration, limit on transfers, longitudinal unlocking, redemptions, etc | Done |
-| 2b.  | [Direct  Wallet  Transfer](https://github.com/Cerebellum-Network/turnkey-private-blockchain-network/blob/dev/docs/direct_wallet_transfer.md) | Support for most Substrate/Polkadot based wallet applications. Smart Contract transfer function allows for the directly wallet-signed transfer of assets from one application/user address to the other. | Done |
-| 2c.  | [Automated Token Transfer](https://github.com/Cerebellum-Network/turnkey-private-blockchain-network/blob/dev/ext20/lib.rs#L100) | Smart Contract transfer function allows for the programmatic/automated transfer of tokens from one application/user via smart contract to the other. | Done |
-| 2d.  | [Asset Restrictions](https://github.com/Cerebellum-Network/turnkey-private-blockchain-network/blob/dev/docs/asset_restrictions.md) | Support for the locking of assets by time or by issuer permission, support for expirations and potentially invalidations. | Done |
-| 3.  | [Smart Contract Tests](https://github.com/Cerebellum-Network/turnkey-private-blockchain-network/blob/dev/ext20/lib.rs#L196) | The Smart Contract implementation will include unit tests, we will be using the off-chain test environment that ink! provides. | Done |
+| 1. | [Documentation](https://github.com/Cerebellum-Network/private-standalone-network-node#documentation) and [basic tests](https://github.com/Cerebellum-Network/turnkey-private-blockchain-network/blob/dev/docs/deployment.md) | We will provide README files inside repositories with instructions of how to build, deploy and test. |  Done |
+| 2.  | [Ink! based Smart Contract Standard](https://github.com/Cerebellum-Network/cere-enterprise-smart-contracts/blob/master/cere01/specification.md) | We are introducing a new smart contract standard which allows assets adaptable for real businesses to be programmatically created, managed, owned, transferred, and traded. It provides a template for establishing a foundation to capture common enterprise utility, and can be easily extended.. This standard is purposefully being built on top of Parity’s ink! Smart contract framework. | Done |
+| 2a.  | [Enterprise Derivative Assets](https://github.com/Cerebellum-Network/cere-enterprise-smart-contracts/blob/master/cere01/specification.md) | Derivative Asset support for the enterprise needs, with attributes such as expiration, limit on transfers, longitudinal unlocking, redemptions, etc | Done |
+| 2b.  | [Direct  Wallet  Transfer](https://github.com/Cerebellum-Network/private-standalone-network-node/blob/dev/docs/direct_wallet_transfer.md) | Support for most Substrate/Polkadot based wallet applications. Smart Contract transfer function allows for the directly wallet-signed transfer of assets from one application/user address to the other. | Done |
+| 2c.  | [Automated Token Transfer](https://github.com/Cerebellum-Network/private-standalone-network-node/blob/dev/ext20/lib.rs#L100) | Smart Contract transfer function allows for the programmatic/automated transfer of tokens from one application/user via smart contract to the other. | Done |
+| 2d.  | [Asset Restrictions](https://github.com/Cerebellum-Network/private-standalone-network-node/blob/dev/docs/asset_restrictions.md) | Support for the locking of assets by time or by issuer permission, support for expirations and potentially invalidations. | Done |
+| 3.  | [Smart Contract Tests](https://github.com/Cerebellum-Network/private-standalone-network-node/blob/dev/ext20/lib.rs#L196) | The Smart Contract implementation will include unit tests, we will be using the off-chain test environment that ink! provides. | Done |
 
 ### Milestone 2
 
