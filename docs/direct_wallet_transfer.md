@@ -12,4 +12,4 @@ Support for the most Substrate/Polkadot based wallet applications. Smart Contrac
 
 #### That's it!
 
-[< Back to the features list](./../README.md#supported-features)
+[< Back to the features list](./../README.md#testing-key-functionalities)

@@ -28,4 +28,4 @@ Click "Deploy" button.
 
 #### That's it!
 
-[< Back to the features list](./../README.md#supported-features)
+[< Back to the features list](./../README.md#testing-key-functionalities)
