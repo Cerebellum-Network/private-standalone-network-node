@@ -17,6 +17,7 @@ First, install [Docker](https://docs.docker.com/get-docker/) and
 Then run the following command to start a single node development chain.
 
 ```bash
+mkdir .local
 ./scripts/docker_run.sh
 ```
 
