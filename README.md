@@ -18,18 +18,16 @@ Below we have the overview of all the key features that this project will suppor
 
 ### Repository Hierarchy:
 ```
-├── Turn-key Private Standalone Network Node [link](https://github.com/Cerebellum-Network/turnkey-private-blockchain-network)
-│   ├── Cere Node (./node)
+├── Private Standalone Network (PSN) Node [link](https://github.com/Cerebellum-Network/turnkey-private-blockchain-network)
+│   ├── PSN Node (./node)
 │   ├── Packaging & Deployment Scripts (./scrips)
-│   ├── Cere Pallets (./pallets)
+│   ├── PSN Pallets (./pallets)
 │   │	    └── Transfer Data Pallet [future] (./pallets/send-data)
 │   │    	    └── Cere DDC service connector
-│   └── Cere Runtime Module (./runtime)
-│    	    ├── Included official base pallets that public by Substrate
-│   	    │     └── Added Substrate Smart Contract Pallet
+│   └── PSN Runtime Module (./runtime)
 │    	    └── Included custom Cere Data Transfer Pallet
 │
-└── Cere Smart Contracts [link](https://github.com/Cerebellum-Network/cere-smart-contracts)
+└── Smart Contracts [link](https://github.com/Cerebellum-Network/cere-smart-contracts)
     └── Enterprise Derivative Assets (./cere01)
          └── CERE01 Standard (./specification)
          └── Implementation (./cere01/src/lib.rs)
@@ -61,18 +59,18 @@ There will be three primary directories in this repository:
 | 2c.  | [Automated Token Transfer](https://github.com/Cerebellum-Network/turnkey-private-blockchain-network/blob/dev/ext20/lib.rs#L100) | Smart Contract transfer function allows for the programmatic/automated transfer of tokens from one application/user via smart contract to the other. | Done |
 | 2d.  | [Asset Restrictions](https://github.com/Cerebellum-Network/turnkey-private-blockchain-network/blob/dev/docs/asset_restrictions.md) | Support for the locking of assets by time or by issuer permission, support for expirations and potentially invalidations. | Done |
 | 3.  | [Smart Contract Tests](https://github.com/Cerebellum-Network/turnkey-private-blockchain-network/blob/dev/ext20/lib.rs#L196) | The Smart Contract implementation will include unit tests, we will be using the off-chain test environment that ink! provides. | Done |
-| 4.  | Supporting Fee-less Transactions | This is an important feature to allow enterprises to conduct value transfers between app/user accounts without worrying about fees. | In Progress |  
 
 ### Milestone 2
 
 
 | Number | Deliverable | Specification | Status |
 | ------------- | ------------- | ------------- | ------- |
-| 1.  | Deployment packaging | At minimum the docker container or even the entire script that packages the container with the latest code from Substrate will also run on CI to test the deliverables of the milestone. |  Pending |
-| 2.  | Testing | Repositories including the  deployment and test sections for instructions and scripts to help contributors thatto package, deploy, run, test. | Pending |
-| 3.  | (optional) Batch processing | Allowing an app to optimize for creating asset transfers or data events to a batch of users at once, this would be a very nice to have from our practical experience. | Pending |
-| 4.  | Tutorial | Cere will provide written documentation as well as a video tutorial on how to integrate and use Cere’s turnkey private blockchain networks for applications to showcase the ease of use. | Pending |
-| 5.  | Article | The main topic/theme: “...Cere Network is providing a turn-key permissioned standalone blockchain network which can be readily integrated by any enterprise. Since it’s built with Substrate, this network can be potentially integrated into any Polkadot/Substrate based Layer 1 network to serve as a secondary chain. Furthermore, any network built from or derived from this project will also be able to use derivative assets to represent real-world value transfers on-chain (e.g. micropayments, discount vouchers, loyalty points, etc), as well as being able to programatically issue these assets between user and application wallets... |   Pending |
+| 1.  | Supporting Fee-less Transactions | This is an important feature to allow enterprises to conduct value transfers between app/user accounts without worrying about fees. | In Progress |  
+| 2.  | Deployment packaging | At minimum the docker container or even the entire script that packages the container with the latest code from Substrate will also run on CI to test the deliverables of the milestone. |  Pending |
+| 3.  | Testing | Repositories including the  deployment and test sections for instructions and scripts to help contributors thatto package, deploy, run, test. | Pending |
+| 4.  | (optional) Batch processing | Allowing an app to optimize for creating asset transfers or data events to a batch of users at once, this would be a very nice to have from our practical experience. | Pending |
+| 5.  | Tutorial | Cere will provide written documentation as well as a video tutorial on how to integrate and use Cere’s turnkey private blockchain networks for applications to showcase the ease of use. | Pending |
+| 6.  | Article | The main topic/theme: “...Cere Network is providing a turn-key permissioned standalone blockchain network which can be readily integrated by any enterprise. Since it’s built with Substrate, this network can be potentially integrated into any Polkadot/Substrate based Layer 1 network to serve as a secondary chain. Furthermore, any network built from or derived from this project will also be able to use derivative assets to represent real-world value transfers on-chain (e.g. micropayments, discount vouchers, loyalty points, etc), as well as being able to programatically issue these assets between user and application wallets... |   Pending |
 
 ## Documentation
 This repository consist of a [new smart contract standard](./ext20/lib.rs) which allows assets adaptable for real businesses to be programmatically created, managed, owned, transferred, and traded. It provides a template for establishing a foundation to capture common enterprise utility, and can be easily extended.. This standard is purposefully being built on top of Parity’s ink! Smart contract framework.
@@ -83,8 +81,8 @@ This repository consist of a [new smart contract standard](./ext20/lib.rs) which
 * [Automated Token Transfer](./docs/automated_token_transfer.md)
 * [Asset Restrictions](./docs/asset_restrictions.md)
 
-## Tutorial
-See [Tutorial](./docs/tutorial.md)
+## Quick Start Guide
+See [Quick Start Guide](./docs/tutorial.md)
 
 ## Installation
 See [Installation](./docs/deployment.md)
