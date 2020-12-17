@@ -58,6 +58,9 @@ sp-version = { default-features = false, version = '2.0.0' }
 pallet-contracts = { version = "2.0.0", default_features = false }
 pallet-contracts-primitives = { version = "2.0.0", default_features = false }
 pallet-contracts-rpc-runtime-api = { version = "0.8.0", default-features = false }
+# Support proof of stake
+pallet-babe = { default-features = false, version = '2.0.0' }
+sp-consensus-babe = { default-features = false, version = '0.8.0' }
 
 [features]
 default = ['std']
@@ -70,6 +73,8 @@ runtime-benchmarks = [
     'pallet-balances/runtime-benchmarks',
     'pallet-timestamp/runtime-benchmarks',
     'sp-runtime/runtime-benchmarks',
+    # Support proof of stake
+    'pallet-babe/runtime-benchmarks',
 ]
 std = [
     'codec/std',
@@ -102,4 +107,7 @@ std = [
     'pallet-contracts/std',
     'pallet-contracts-primitives/std',
     'pallet-contracts-rpc-runtime-api/std',
+    # Support proof of stake
+    'pallet-babe/std',
+	'sp-consensus-babe/std',
 ]

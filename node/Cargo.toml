@@ -54,6 +54,9 @@ substrate-frame-rpc-system = '2.0.0'
 # Support pallet contract
 pallet-contracts = '2.0.0'
 pallet-contracts-rpc = '0.8.0'
+# Support proof of stake
+pallet-babe = '2.0.0'
+sp-consensus-babe = '0.8.0'
 
 [features]
 default = []
