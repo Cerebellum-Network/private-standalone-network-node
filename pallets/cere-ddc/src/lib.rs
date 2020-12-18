@@ -37,7 +37,7 @@ decl_storage! {
 	// A unique name is used to ensure that the pallet's storage items are isolated.
 	// This name may be updated, but each pallet in the runtime must use a unique name.
 	// ---------------------------------vvvvvvvvvvvvvv
-	trait Store for Module<T: Trait> as SendDataModule {
+	trait Store for Module<T: Trait> as CereDDCModule {
 		/// The lookup table for string.
 		StringDataOf: map hasher(twox_64_concat) T::AccountId => Option<Vec<u8>>;
 	}

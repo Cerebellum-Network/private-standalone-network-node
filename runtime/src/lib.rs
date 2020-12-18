@@ -42,7 +42,7 @@ pub use frame_support::{
 use pallet_contracts_rpc_runtime_api::ContractExecResult;
 
 /// Import the send data pallet.
-pub use pallet_send_data;
+pub use pallet_cere_ddc;
 
 /// An index to a block.
 pub type BlockNumber = u32;
@@ -306,7 +306,7 @@ parameter_types! {
 }
 
 /// Configure the send data pallet in pallets/template.
-impl pallet_send_data::Trait for Runtime {
+impl pallet_cere_ddc::Trait for Runtime {
 	// Use the MinNickLength from the parameter_types block.
 	type MinLength = MinNickLength;
 
@@ -333,7 +333,7 @@ construct_runtime!(
 		TransactionPayment: pallet_transaction_payment::{Module, Storage},
 		Sudo: pallet_sudo::{Module, Call, Config<T>, Storage, Event<T>},
 		// Include the custom logic from the template pallet in the runtime.
-		SendDataModule: pallet_send_data::{Module, Call, Storage, Event<T>},
+		CereDDCModule: pallet_cere_ddc::{Module, Call, Storage, Event<T>},
 		// Support pallet contract
 		Contracts: pallet_contracts::{Module, Call, Config, Storage, Event<T>},
 	}
