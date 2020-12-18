@@ -4,7 +4,7 @@ description = 'FRAME pallet template for defining custom runtime logic.'
 edition = '2018'
 homepage = 'https://www.cere.network/'
 license = 'Unlicense'
-name = 'pallet-send-data'
+name = 'pallet-cere-ddc'
 repository = 'https://github.com/Cerebellum-Network/private-standalone-network-node/'
 version = '2.0.0'
 
