@@ -7,7 +7,7 @@
 .DS_Store
 
 # The cache for docker container dependency
-.cargo
+.cargo/
 
 # The cache for chain data in container
 .local/*
@@ -17,3 +17,21 @@
 
 *.iml
 .idea
+
+*.swp
+.wasm-binaries
+pwasm-alloc/target/
+pwasm-libc/target/
+pwasm-alloc/Cargo.lock
+pwasm-libc/Cargo.lock
+bin/node/runtime/wasm/target/
+**/._*
+**/.criterion/
+polkadot.*
+nohup.out
+rls*.log
+*.orig
+*.rej
+**/wip/*.stderr
+**/hfuzz_target/
+**/hfuzz_workspace/
