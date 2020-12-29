@@ -10,7 +10,7 @@
 ```
 ### Run the main node with dev mode by command line:
 ```bash
-docker run -it --name cerenode -d -p 9944:9944 -p 9933:9933 --entrypoint '/bin/sh' cerebellumnetwork/turnkey-private-blockchain-network -c '/usr/local/bin/node-template --dev --ws-external'
+docker run -it --name cerenode -d -p 9944:9944 -p 9933:9933 --entrypoint '/bin/sh' cerebellumnetwork/turnkey-private-blockchain-network -c '/usr/local/bin/cere --dev --ws-external'
 ```
 
 # -------------------- II. Build docker image for cere-substrate --------------------
