@@ -20,7 +20,7 @@ FROM phusion/baseimage:0.11
 LABEL maintainer="team@cere.io"
 LABEL description="This is the optimization to create a small image."
 ARG PROFILE=release
-COPY --from=builder /cereio/target/$PROFILE/node-template /usr/local/bin
+COPY --from=builder /cereio/target/$PROFILE/cere /usr/local/bin
 
 RUN mv /usr/share/ca* /tmp && \
 	rm -rf /usr/share/*  && \
@@ -28,13 +28,13 @@ RUN mv /usr/share/ca* /tmp && \
 	rm -rf /usr/lib/python* && \
 	useradd -m -u 1000 -U -s /bin/sh -d /cereio cereio && \
 	mkdir -p /cereio/.local/share/cereio && \
-	mkdir -p /cereio/.local/share/node-template && \
+	mkdir -p /cereio/.local/share/cere && \
 	chown -R cereio:cereio /cereio/.local && \
-	ln -s /cereio/.local/share/node-template /data && \
+	ln -s /cereio/.local/share/cere /data && \
 	rm -rf /usr/bin /usr/sbin
 
 USER cereio
 EXPOSE 30333 9933 9944
 VOLUME ["/data"]
 
-CMD ["/usr/local/bin/node-template"]
+CMD ["/usr/local/bin/cere"]
