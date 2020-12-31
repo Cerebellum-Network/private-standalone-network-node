@@ -1,49 +1,31 @@
 # How to deploy
 
-### Run public docker image
+### Option 1: Run public docker image immediately with command:
 ```bash
 docker run -d -P --name cerenode cerebellumnetwork/turnkey-private-blockchain-network
 ```
 
-### Build locally
+### Option 2: Build docker image locally from sources:
+1. Clone this repository.
+2. Run command to build locally:
 ```bash
 docker build .
 ```
 
-### Run in Docker by docker compose
-First, install [Docker](https://docs.docker.com/get-docker/) and
-[Docker Compose](https://docs.docker.com/compose/install/).
-
-Then run the following command to start a single node development chain.
-
+### Option 3: Run in Docker by docker compose
+1. Clone this repository
+2. Run the following command to start a single node development chain.
 ```bash
 ./scripts/docker_run.sh
 ```
 
-This command will firstly compile your code, and then start a local development network. You can
-also replace the default command (`cargo build --release && ./target/release/node-template --dev --ws-external`)
-by appending your own. A few useful ones are as follow.
-
+# Option 4: Build from source locally without docker:
+1. Clone this repository
+2. Run command to build from sources
 ```bash
-# Run Substrate node without re-compiling
-./scripts/docker_run.sh ./target/release/node-template --dev --ws-external
-
-# Run Substrate node without re-compiling with rpc
-./scripts/docker_run.sh ./target/release/node-template --dev --ws-external --rpc-external
-
-# Purge the local dev chain
-./scripts/docker_run.sh ./target/release/node-template purge-chain --dev
-
-# Check whether the code is compilable
-./scripts/docker_run.sh cargo check
+cargo +nightly-2020-10-06 build
 ```
-
-# Build from source:
+3. Once it finished (it could take a while), you can run node with command:
 ```bash
-cargo build --release
-```
-
-# Run for the development:
-```bash
-./target/release/node-template --dev --tmp
+./target/debug/node-template --dev --tmp
 ```
