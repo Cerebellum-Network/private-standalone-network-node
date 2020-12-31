@@ -1,25 +1,18 @@
 # How to create Smart Contract artifacts
 
-### **Test smart contract source**
+1. Clone [Cere Enterprise Smart Contracts Repository](https://github.com/Cerebellum-Network/cere-enterprise-smart-contracts.git)
+
+2. Run Smart Contract tests
 ```bash
 cargo +nightly test
 ```
 
-
-### **Build smart contract**
+3. Build smart contract from sources
 ```bash
 cargo +nightly contract build
 ```
 
-
-### **Generage Contract Metadata**
+4. Generage Contract Metadata
 ```bash
 cargo +nightly contract generate-metadata
 ```
-
-
-### **Creating an ink! Project**
-```bash
-cargo contract new flipper
-```
-
