@@ -19,7 +19,7 @@ docker build .
 ./scripts/docker_run.sh
 ```
 
-# Option 4: Build from source locally without docker:
+### Option 4: Build from source locally without docker:
 1. Clone this repository
 2. Run command to build from sources
 ```bash
