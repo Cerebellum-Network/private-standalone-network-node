@@ -28,36 +28,36 @@ serde = { features = ['derive'], optional = true, version = '1.0.101' }
 pallet-cere-ddc = { path = '../pallets/cere-ddc', default-features = false, version = '2.0.0' }
 
 # Substrate dependencies
-frame-benchmarking = { default-features = false, optional = true, version = '2.0.0' }
-frame-executive = { default-features = false, version = '2.0.0' }
-frame-support = { default-features = false, version = '2.0.0' }
-frame-system = { default-features = false, version = '2.0.0' }
-frame-system-benchmarking = { default-features = false, optional = true, version = '2.0.0' }
-frame-system-rpc-runtime-api = { default-features = false, version = '2.0.0' }
-pallet-aura = { default-features = false, version = '2.0.0' }
-pallet-balances = { default-features = false, version = '2.0.0' }
-pallet-grandpa = { default-features = false, version = '2.0.0' }
-pallet-randomness-collective-flip = { default-features = false, version = '2.0.0' }
-pallet-sudo = { default-features = false, version = '2.0.0' }
-pallet-timestamp = { default-features = false, version = '2.0.0' }
-pallet-transaction-payment = { default-features = false, version = '2.0.0' }
-pallet-transaction-payment-rpc-runtime-api = { default-features = false, version = '2.0.0' }
-sp-api = { default-features = false, version = '2.0.0' }
-sp-block-builder = { default-features = false, version = '2.0.0' }
-sp-consensus-aura = { default-features = false, version = '0.8.0' }
-sp-core = { default-features = false, version = '2.0.0' }
-sp-inherents = { default-features = false, version = '2.0.0' }
-sp-offchain = { default-features = false, version = '2.0.0' }
-sp-runtime = { default-features = false, version = '2.0.0' }
-sp-session = { default-features = false, version = '2.0.0' }
-sp-std = { default-features = false, version = '2.0.0' }
-sp-transaction-pool = { default-features = false, version = '2.0.0' }
-sp-version = { default-features = false, version = '2.0.0' }
+frame-benchmarking = { default-features = false, optional = true, version = '2.0.0', path = '../../substrate/frame/benchmarking' }
+frame-executive = { default-features = false, version = '2.0.0', path = '../../substrate/frame/executive' }
+frame-support = { default-features = false, version = '2.0.0', path = '../../substrate/frame/support' }
+frame-system = { default-features = false, version = '2.0.0', path = '../../substrate/frame/system' }
+frame-system-benchmarking = { default-features = false, optional = true, version = '2.0.0', path = '../../substrate/frame/system/benchmarking' }
+frame-system-rpc-runtime-api = { default-features = false, version = '2.0.0', path = '../../substrate/frame/system/rpc/runtime-api' }
+pallet-aura = { default-features = false, version = '2.0.0', path = '../../substrate/frame/aura' }
+pallet-balances = { default-features = false, version = '2.0.0', path = '../../substrate/frame/balances' }
+pallet-grandpa = { default-features = false, version = '2.0.0', path = '../../substrate/frame/grandpa' }
+pallet-randomness-collective-flip = { default-features = false, version = '2.0.0', path = '../../substrate/frame/randomness-collective-flip' }
+pallet-sudo = { default-features = false, version = '2.0.0', path = '../../substrate/frame/sudo' }
+pallet-timestamp = { default-features = false, version = '2.0.0', path = '../../substrate/frame/timestamp' }
+pallet-transaction-payment = { default-features = false, version = '2.0.0', path = '../../substrate/frame/transaction-payment' }
+pallet-transaction-payment-rpc-runtime-api = { default-features = false, version = '2.0.0', path = '../../substrate/frame/transaction-payment/rpc/runtime-api'}
+sp-api = { default-features = false, version = '2.0.0', path = '../../substrate/primitives/api' }
+sp-block-builder = { default-features = false, version = '2.0.0', path = '../../substrate/primitives/block-builder' }
+sp-consensus-aura = { default-features = false, version = '0.8.0', path = '../../substrate/primitives/consensus/aura' }
+sp-core = { default-features = false, version = '2.0.0', path = '../../substrate/primitives/core' }
+sp-inherents = { default-features = false, version = '2.0.0', path = '../../substrate/primitives/inherents' }
+sp-offchain = { default-features = false, version = '2.0.0', path = '../../substrate/primitives/offchain' }
+sp-runtime = { default-features = false, version = '2.0.0', path = '../../substrate/primitives/runtime' }
+sp-session = { default-features = false, version = '2.0.0', path = '../../substrate/primitives/session' }
+sp-std = { default-features = false, version = '2.0.0', path = '../../substrate/primitives/std' }
+sp-transaction-pool = { default-features = false, version = '2.0.0', path = '../../substrate/primitives/transaction-pool' }
+sp-version = { default-features = false, version = '2.0.0', path = '../../substrate/primitives/version' }
 
 # Support pallet contract
-pallet-contracts = { version = "2.0.0", default_features = false }
-pallet-contracts-primitives = { version = "2.0.0", default_features = false }
-pallet-contracts-rpc-runtime-api = { version = "0.8.0", default-features = false }
+pallet-contracts = { version = "2.0.0", default_features = false, path = '../../substrate/frame/contracts' }
+pallet-contracts-primitives = { version = "2.0.0", default_features = false, path = '../../substrate/frame/contracts/common' }
+pallet-contracts-rpc-runtime-api = { version = "0.8.0", default-features = false, path = '../../substrate/frame/contracts/rpc/runtime-api' }
 
 [features]
 default = ['std']
