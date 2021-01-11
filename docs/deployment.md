@@ -1,49 +1,35 @@
 # How to deploy
 
-### Run public docker image
+### Option 1: Run public docker image
+ You can run Private Node immediately. You don't even need to clone the repo. Use this command:
 ```bash
-docker run -d -P --name cerenode cerebellumnetwork/turnkey-private-blockchain-network
+docker run -d -P --name NAME_OF_YOUR_NODE cerebellumnetwork/turnkey-private-blockchain-network
 ```
 
-### Build locally
+### Option 2: Build docker image locally
+In order to have a local Docker image, build from sources, you can use the following steps:
+1. Clone this repository.
+2. Run command to build locally (from the root directory of this repo):
 ```bash
 docker build .
 ```
 
-### Run in Docker by docker compose
-First, install [Docker](https://docs.docker.com/get-docker/) and
-[Docker Compose](https://docs.docker.com/compose/install/).
-
-Then run the following command to start a single node development chain.
-
+### Option 3: Build and run using docker-compose
+In order to run ready-to-use Private Node, you can use `docker-compose` file provided by this repository with all pre-configured parameters. Follow the steps:
+1. Clone this repository
+2. Run the following command to start a single node development chain  (from the root directory of this repo):
 ```bash
 ./scripts/docker_run.sh
 ```
 
-This command will firstly compile your code, and then start a local development network. You can
-also replace the default command (`cargo build --release && ./target/release/node-template --dev --ws-external`)
-by appending your own. A few useful ones are as follow.
-
+### Option 4: Build and run without docker
+In order to build and run Private Node without docker you need to have `cargo` [installed and properly configured](https://doc.rust-lang.org/cargo/getting-started/installation.html). Follow the steps:
+1. Clone this repository
+2. Run command to build from sources (from the root directory of this repo)
 ```bash
-# Run Substrate node without re-compiling
-./scripts/docker_run.sh ./target/release/node-template --dev --ws-external
-
-# Run Substrate node without re-compiling with rpc
-./scripts/docker_run.sh ./target/release/node-template --dev --ws-external --rpc-external
-
-# Purge the local dev chain
-./scripts/docker_run.sh ./target/release/node-template purge-chain --dev
-
-# Check whether the code is compilable
-./scripts/docker_run.sh cargo check
+cargo +nightly-2020-10-06 build
 ```
-
-# Build from source:
+3. Once it finished (it could take a while), you can run node with command:
 ```bash
-cargo build --release
-```
-
-# Run for the development:
-```bash
-./target/release/node-template --dev --tmp
+./target/debug/node-template --dev --tmp
 ```
