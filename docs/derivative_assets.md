@@ -11,8 +11,8 @@ Follow [this](./create_sc_artifacts.md) link to build Smart Contract artifacts f
 1. Go to Polkadot [Block Viewer](https://polkadot.js.org/apps/?rpc=ws%3A%2F%2Flocalhost%3A9944#/contracts)
 2. Open Developer→Contracts
 3. Click "Upload WASM" button
-4. Specify .WASM file and metadata.json
-5. Click upload and select source account to upload artifacts. You can use pre-defined Alice account for example.
+4. Specify metadata.json and .WASM files
+5. Click upload and select source account to upload artifacts. You can use pre-defined Alice account.
 
 ### 3. Deploy Smart Contract
 
