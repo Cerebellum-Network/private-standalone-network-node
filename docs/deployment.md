@@ -3,7 +3,7 @@
 ### Option 1: Run public docker image
  You can run Private Node immediately. You don't even need to clone the repo. Use this command:
 ```bash
-docker run -d -P --name NAME_OF_YOUR_NODE cerebellumnetwork/turnkey-private-blockchain-network
+docker run -d --name NAME_OF_YOUR_NODE -p 9944:9944 --entrypoint /usr/local/bin/node-template cerebellumnetwork/turnkey-private-blockchain-network --dev --ws-external
 ```
 
 ### Option 2: Build docker image locally
