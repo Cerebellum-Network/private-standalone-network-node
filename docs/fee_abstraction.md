@@ -5,15 +5,18 @@ During the contract execution we provide a possibility to refund amount of fees 
 
 You can use either Polkadot UI to check this or do it programmatically:
 #### 1. Send assets from user's account to the application account with refund using Polkadot UI:
-When we submit the `transfer` function we have `transactionFee` parameter:
+
+Use [Tutorial](./tutorial.md) to configure Node, run Polkadot UI and deploy Smart Contract.
+
+Contract call for the `transfer` function consist of `transactionFee` parameter:
 ![transaction fee parameter](https://staticassetsshare.s3-us-west-2.amazonaws.com/Screenshot+from+2021-01-12+14-05-47.png)
-We can keep it 0 for now and click `Execute` button.
+Let's keep it 0 for now and click `Execute` button.
 
 Here we can see estimated fees for this transaction:
 ![estimated amount](https://staticassetsshare.s3-us-west-2.amazonaws.com/Screenshot+from+2021-01-12+14-06-03.png)
 You can find it above the `sending from my account` block. So, 125.0002 nano Unit will be charged.
 
-We click `Cancel` and specify this exact amount and amount of tokens to be transfered:
+Click `Cancel` and specify this exact amount of tokens to be transferred:
 ![specify refund fee](https://staticassetsshare.s3-us-west-2.amazonaws.com/Screenshot+from+2021-01-12+14-06-22.png)
 Now we can click `Execute` button and `Sign and Submit` on the next window.
 
