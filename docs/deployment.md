@@ -1,5 +1,9 @@
 # How to deploy
 
+This section allows you to deploy the first Network Node. Once you set this up, you can test it using [Running Tests](./tests.md) section.
+
+There are several options to up and run Node:
+
 ### Option 1: Run public docker image
  You can run Private Node immediately. You don't even need to clone the repo. Use this command:
 ```bash

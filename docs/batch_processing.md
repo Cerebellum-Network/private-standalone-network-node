@@ -22,3 +22,5 @@ api.tx.utility
   });
 ```
 Source is [here](https://polkadot.js.org/docs/api/cookbook/tx/#how-can-i-batch-transactions).
+
+Try using [Test Scripts](https://github.com/Cerebellum-Network/test-scripts) to check how it works on practise.
