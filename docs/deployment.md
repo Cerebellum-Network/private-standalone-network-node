@@ -1,5 +1,9 @@
 # How to deploy
 
+This section allows you to deploy the first Network Node. Once you set this up, you can test it using [Running Tests](./tests.md) section.
+
+There are several options to up and run Node:
+
 ### Option 1: Run public docker image
  You can run Private Node immediately. You don't even need to clone the repo. Use this command:
 ```bash
@@ -17,7 +21,7 @@ docker build .
 ### Option 3: Build and run using docker-compose
 In order to run ready-to-use Private Node, you can use `docker-compose` file provided by this repository with all pre-configured parameters. Follow the steps:
 1. Clone this repository
-2. Run the following command to start a single node development chain  (from the root directory of this repo):
+2. Run command to start a single node development chain  (from the root directory of this repo):
 ```bash
 ./scripts/docker_run.sh
 ```
@@ -32,4 +36,8 @@ cargo +nightly-2020-10-06 build
 3. Once it finished (it could take a while), you can run node with command:
 ```bash
 ./target/debug/node-template --dev --tmp
+```
+*You can check more supported flags using command:*
+```bash
+./target/debug/node-template --help
 ```
