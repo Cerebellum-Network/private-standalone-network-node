@@ -1,9 +1,14 @@
 # Fee Abstraction support
-Since we provide a solution for applications/businesses, we don't want application owner to take care of fees, specifically for user's wallet. 
+Since we provide a solution for applications/businesses, we don't want application users to take care of fees. 
 
 During the contract execution we provide a possibility to refund amount of fees to be charged from the user's wallet.
 
-You can use either Polkadot UI to check this or do it programmatically:
+How it works?
+* We fund native tokens to the Smart Contract address during the deployment (`endowment` parameter) or later by transfer native tokens.
+* Before the Smart Contract execution we estimate amount of fees to be paid by user's wallet/account.
+* During the Smart Contract execution we refund tokens from Smart Contract address to the user's wallet (who submit Smart Contract call transaction).
+
+You can use either Polkadot UI to test this or do it programmatically:
 #### 1. Send assets from user's account to the application account with refund using Polkadot UI:
 
 Use [Tutorial](./tutorial.md) to configure Node, run Polkadot UI and deploy Smart Contract.
@@ -53,3 +58,5 @@ Now we'are ready to submit transaction to the network:
 ```javascript
 transferObj.signAndSend(this.userKeyring, <callback>);
 ```
+
+Try this out using [Test Scripts](https://github.com/Cerebellum-Network/test-scripts)!
