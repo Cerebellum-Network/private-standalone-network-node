@@ -51,6 +51,10 @@ impl system::Trait for Test {
 
 impl Trait for Test {
 	type Event = ();
+
+	type MinLength = ();
+
+	type MaxLength = ();
 }
 
 pub type CereDDCModule = Module<Test>;
