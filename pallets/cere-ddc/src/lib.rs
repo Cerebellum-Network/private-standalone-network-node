@@ -1,10 +1,13 @@
 #![cfg_attr(not(feature = "std"), no_std)]
 
 use frame_support::{
-	decl_error, decl_event, decl_module, decl_storage,
+	decl_error,
+	decl_event,
+	decl_module,
+	decl_storage,
 	// dispatch,
 	ensure,
-	traits::{ Get },
+	traits::Get,
 };
 use frame_system::ensure_signed;
 
@@ -52,7 +55,6 @@ decl_event!(
 	{
 		/// A data string was set. \[who\]
 		DataStringSet(AccountId),
-	
 		/// A data string was changed. \[who\]
 		DataStringChanged(AccountId),
 	}
