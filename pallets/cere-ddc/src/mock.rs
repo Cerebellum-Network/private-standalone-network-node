@@ -56,9 +56,7 @@ parameter_types! {
 
 impl Trait for Test {
 	type Event = ();
-
 	type MinLength = MinLength;
-
 	type MaxLength = MaxLength;
 }
 
