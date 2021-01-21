@@ -11,7 +11,7 @@ How it works?
 You can use either Polkadot UI to test this or do it programmatically:
 #### 1. Send assets from user's account to the application account with refund using Polkadot UI:
 
-Use [Tutorial](./tutorial.md) to configure Node, run Polkadot UI and deploy Smart Contract.
+Use [Tutorial](./quick-start.md) to configure Node, run Polkadot UI and deploy Smart Contract.
 
 Contract call for the `transfer` function consist of `transactionFee` parameter:
 ![transaction fee parameter](https://staticassetsshare.s3-us-west-2.amazonaws.com/Screenshot+from+2021-01-12+14-05-47.png)

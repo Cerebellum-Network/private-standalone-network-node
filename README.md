@@ -78,8 +78,10 @@ There will be three primary directories in this repository:
 This repository consist of a [new smart contract standard](https://github.com/Cerebellum-Network/cere-enterprise-smart-contracts/blob/master/cere01/lib.rs) which allows assets adaptable for real businesses to be programmatically created, managed, owned, transferred, and traded. It provides a template for establishing a foundation to capture common enterprise utility, and can be easily extended. This standard is purposefully being built on top of Parity’s ink! Smart contract framework.
 
 ## Quick Start Guide
-See [Quick Start Guide](./docs/tutorial.md)
+See [Quick Start Guide](docs/quick-start.md)
 
+## Tutorial
+See [Private Network Tutorial](docs/tutorial.md)
 
 ## Testing key functionalities
 * [Enterprise Derivative Assets](./docs/derivative_assets.md)
