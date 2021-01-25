@@ -5,7 +5,7 @@
  
 ## How to deploy Enterprise Derivative assets via Smart Contract
 ### 1. Create Smart Contract artifacts
-Follow [this](./create_sc_artifacts.md) link to build Smart Contract artifacts from sources or checkout the latest version: [metadata.json](https://github.com/Cerebellum-Network/derivative-asset-smart-contract/blob/master/example/metadata.json), [cere01.wasm](https://github.com/Cerebellum-Network/derivative-asset-smart-contract/blob/master
+Follow [this](./create_sc_artifacts.md) link to build Smart Contract artifacts from sources or checkout the latest version: [metadata.json](https://github.com/Cerebellum-Network/derivative-asset-smart-contract/blob/master/examples/cere01/metadata.json), [cere01.wasm](https://github.com/Cerebellum-Network/derivative-asset-smart-contract/blob/master
 /example/cere01.wasm).
 ### 2. Upload artifacts (wasm and metadata files) first
 
