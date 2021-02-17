@@ -12,7 +12,7 @@ Follow [this](./create_sc_artifacts.md) link to build Smart Contract artifacts f
 2. Open Developer→Contracts
 3. Click "Upload WASM" button
 4. Specify metadata.json and .WASM files
-5. Click upload and select source account to upload artifacts. You can use pre-defined Alice account.
+5. Click upload and select source account to upload artifacts. You can use pre-defined Alice account or any other with native tokens on balance.
 
 ### 3. Deploy Smart Contract
 
