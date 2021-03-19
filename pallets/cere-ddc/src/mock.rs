@@ -49,12 +49,15 @@ impl system::Trait for Test {
 	type SystemWeightInfo = ();
 }
 
+parameter_types! {
+	pub const MinLength: usize = 8;
+	pub const MaxLength: usize = 10;
+}
+
 impl Trait for Test {
 	type Event = ();
-
-	type MinLength = ();
-
-	type MaxLength = ();
+	type MinLength = MinLength;
+	type MaxLength = MaxLength;
 }
 
 pub type CereDDCModule = Module<Test>;
